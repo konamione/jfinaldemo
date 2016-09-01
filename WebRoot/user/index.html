@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>用户列表</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+    <h1>用户列表</h1>
+    ${(msg.msgContent)!''}
+    <a href="${contextPath}/user/goAddUser">添加用户</a>
+    <table>
+    	<tr>
+    		<td>用户账号</td>
+    		<td>用户密码</td>
+    		<td>真实姓名</td>
+    		<td>联系电话</td>
+    		<td>家庭住址</td>
+    		<td>创建时间</td>
+    		<td>修改时间</td>
+    		<td>操作</td>
+    	</tr>
+    	<!-- 切记！！！freemarker需要安全输出，要使用（）！‘’形式判断字段是否为空，否则显示不出来 -->
+    	<#list userList as user>
+    		<tr>
+    			<td>${(user.username)!'空'}</td>
+    			<td>${(user.userpass)!'空'}</td>
+    			<td>${(user.realname)!'空'}</td>
+    			<td>${(user.phone)!'空'}</td>
+    			<td>${(user.address)!'空'}</td>
+    			<td>${(user.createtime)!'空'}</td>
+    			<td>${(user.modifytime)!'空'}</td>
+    			<td><a href="${contextPath}/user/goAddUser/${user.id}">修改</a>&nbsp;|&nbsp;<a href="${contextPath}/user/deleteById/${user.id}" onclick="return confirm('确定要删除吗？')">删除</a></td>
+    		</tr>
+    	</#list>
+    </table>
+  </body>
+</html>

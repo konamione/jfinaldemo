@@ -1,0 +1,10 @@
+classDriver = com.jdbc.mysql.Driver
+jdbcUrl = jdbc:mysql://127.0.0.1/test?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+user = root
+password = root
+devMode = true
+acquireIncrement = 3
+initialPoolSize = 3
+maxIdleTime = 300
+maxPoolSize = 15
+minPoolSize = 3
