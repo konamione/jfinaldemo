@@ -11,6 +11,7 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.render.ViewType;
 import com.konami.jfd.controller.UserController;
+import com.konami.jfd.interceptor.GloablInterceptor;
 import com.konami.jfd.vo.User;
 
 /**
@@ -25,6 +26,7 @@ public class Config extends JFinalConfig{
 	 */
 	@Override
 	public void configConstant(Constants me) {
+		loadPropertyFile("log4j.properties");
 		me.setDevMode(true);					//设置是否开发模式
 		me.setViewType(ViewType.FREE_MARKER);	//设置视图模式
 	}
@@ -54,7 +56,7 @@ public class Config extends JFinalConfig{
 	 */
 	@Override
 	public void configInterceptor(Interceptors me) {
-		
+		me.add(new GloablInterceptor());
 	}
 
 	/**
