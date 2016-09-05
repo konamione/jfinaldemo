@@ -27,6 +27,7 @@ public class Config extends JFinalConfig{
 	@Override
 	public void configConstant(Constants me) {
 		loadPropertyFile("log4j.properties");
+		loadPropertyFile("a_little_config.txt");
 		me.setDevMode(true);					//设置是否开发模式
 		me.setViewType(ViewType.FREE_MARKER);	//设置视图模式
 	}
