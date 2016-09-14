@@ -12,10 +12,14 @@ public class UserController extends Controller {
 	private UserBiz ub = new UserBiz();
 	
 	public void index(){
-		List<User> userList = ub.loadAllUser();
-		setAttr("userList", userList);
-		renderFreeMarker("index.html");
+		renderFreeMarker("login.html");
 	}
+	
+//	public void index(){
+//		List<User> userList = ub.loadAllUser();
+//		setAttr("userList", userList);
+//		renderFreeMarker("index.html");
+//	}
 	
 	public void goAddUser(){
 		String id = getPara(0);
@@ -46,5 +50,19 @@ public class UserController extends Controller {
 		MessageDto msg = ub.modifyUser(u);
 		setAttr("msg", msg);
 		forwardAction("/user");
+	}
+	
+	public void login(){
+		User u = getModel(User.class);
+		User currentUser = ub.login(u);
+		if (currentUser != null) {
+			setSessionAttr("currentUser", currentUser);
+			String welcomeMsg = "欢迎您：" + currentUser.getStr("realname");
+			setAttr("welcome", welcomeMsg);
+		} else {
+			String fMsg = "用户名或密码错误!";
+			setAttr("fMsg",fMsg);
+			renderFreeMarker("login.html");
+		}
 	}
 }

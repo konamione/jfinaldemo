@@ -10,6 +10,7 @@ import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.render.ViewType;
+import com.konami.jfd.controller.NevController;
 import com.konami.jfd.controller.UserController;
 import com.konami.jfd.interceptor.GloablInterceptor;
 import com.konami.jfd.vo.User;
@@ -38,6 +39,7 @@ public class Config extends JFinalConfig{
 	@Override
 	public void configRoute(Routes me) {
 		me.add("/user", UserController.class);
+		me.add("nev",NevController.class);
 	}
 
 	/**

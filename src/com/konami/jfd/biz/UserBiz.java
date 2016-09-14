@@ -15,6 +15,7 @@ public class UserBiz {
 	public MessageDto addUser(User u){
 		MessageDto msg = new MessageDto();
 		u.set("createtime", new Date());
+		//获取session中用户信息，将用户IDset到实体u中
 		boolean b = u.save();
 		if (b) {
 			msg.setMsgContent("添加成功");
@@ -44,6 +45,7 @@ public class UserBiz {
 	public MessageDto modifyUser(User u){
 		MessageDto msg = new MessageDto();
 		u.set("modifytime", new Date());
+		//获取session中用户信息，将用户IDset到实体u中
 		boolean b = u.update();
 		if (b) {
 			msg.setMsgContent("修改成功");
@@ -52,5 +54,17 @@ public class UserBiz {
 		}
 		msg.setMsgFlag(b);
 		return msg;
+	}
+	
+	public User login(User u){
+		User currentUser = null;
+		MessageDto msg = new MessageDto();
+		String sql = "";
+		sql += "select * from t_user where username = ? and userpass = ?";
+		List<User> uList = u.find(sql,u.getStr("username"),u.getStr("userpass"));
+		if(uList.size() > 0 && uList.get(0) != null){
+			currentUser = uList.get(0);
+		}
+		return currentUser;
 	}
 }
