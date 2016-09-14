@@ -4,14 +4,25 @@ import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
+import com.jfinal.render.RenderFactory;
+import com.konami.jfd.vo.User;
 
 public class GloablInterceptor implements Interceptor{
 
 	@Override
 	public void intercept(Invocation inv) {
-		Logger logger = Logger.getLogger(GloablInterceptor.class);
-		logger.debug(inv.getViewPath());
-		inv.invoke();
+		User u = inv.getController().getSessionAttr("currentUser");
+		String actionKey = inv.getActionKey();
+		if(u != null || (!actionKey.isEmpty() && actionKey.equals("/user/login"))){
+			inv.invoke();
+		}else{
+			inv.getController().setAttr("fMsg", "请先登录!");
+			inv.getController().renderFreeMarker("/user/login.html");
+		}
+//		System.out.println("走了");
+//		Logger logger = Logger.getLogger(GloablInterceptor.class);
+//		logger.debug(inv.getViewPath());
+//		inv.invoke();
 	}
 
 }

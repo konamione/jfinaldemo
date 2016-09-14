@@ -15,7 +15,6 @@ public class UserBiz {
 	public MessageDto addUser(User u){
 		MessageDto msg = new MessageDto();
 		u.set("createtime", new Date());
-		//获取session中用户信息，将用户IDset到实体u中
 		boolean b = u.save();
 		if (b) {
 			msg.setMsgContent("添加成功");
@@ -45,7 +44,6 @@ public class UserBiz {
 	public MessageDto modifyUser(User u){
 		MessageDto msg = new MessageDto();
 		u.set("modifytime", new Date());
-		//获取session中用户信息，将用户IDset到实体u中
 		boolean b = u.update();
 		if (b) {
 			msg.setMsgContent("修改成功");

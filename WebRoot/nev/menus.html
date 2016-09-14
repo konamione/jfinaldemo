@@ -12,13 +12,15 @@
   </head>
   
   <body>
+  	<h1>${welcome!''}</h1>
     <h1>功能列表</h1>
     <p>
-    	<a href="${contentPath}">用户管理</a>
-    	<a href="">入库管理</a>
-    	<a href="">销售管理</a>
-    	<a href="">支出管理</a>
-    	<a href="">报表查询</a>
+    	<a href="${contextPath}/nev/user">用户管理</a>
+    	<a href="${contextPath}/nev/inventory">入库管理</a>
+    	<a href="${contextPath}/nev/sell">销售管理</a>
+    	<a href="${contextPath}/nev/pay">支出管理</a>
+    	<a href="${contextPath}/nev/report">报表查询</a>
+    	<a href="${contextPath}/nev/exit">退出</a>
     </p>
   </body>
 </html>
