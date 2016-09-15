@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>index.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<script type="text/javascript">
+		function caleFinalPrice(){
+			var num = document.getElementById('num').value;
+			var price = document.getElementById('price').value;
+			if(num == null || num == undefined || num == "" || price == null || price == undefined || price == ""){
+				alert("商品数量或单价不能为空！");
+			}else{
+				var fp = parseInt(num) * parseFloat(price);
+				document.getElementById('finalPrice').value = fp;
+			}
+		}
+	</script>
+  </head>
+  
+  <body>
+    <h1>出库列表</h1>
+    <form action="${contextPath}/sell/addSell" method="post">
+    	<fieldset>
+    		<legend>新增出库</legend>
+    		商品：
+    		<select name="sell.goodsid">
+	    		<#list goodsList as goods>
+					<option value="${(goods.id)!''}">${(goods.goodsname)!''}</option>
+				</#list>
+    		</select>
+    		数量：<input type="text" name="sell.goodsnum" id="num"/>
+    		单价：<input type="text" name="sell.goodsPrice" onblur="caleFinalPrice()" id="price"/>
+    		成交价格：<input type="text" name="sell.finalPrice" readonly="readonly" id="finalPrice"/>
+    		销售类型：
+    		<select name="sell.outType">
+    			<option value="sell">销售</option>
+    			<option value="back">退货</option>
+    		</select>
+    		备注：<input type="text" name="sell.remark"/>
+    		<input type="submit" name="ok" value="添加"/>
+    	</fieldset>
+    </form>
+    ${(msg.msgContent)!''}
+    <table>
+    	<tr>
+    		<td>编号</td>
+    		<td>商品id</td>
+    		<td>销售数量</td>
+    		<td>销售单价</td>
+    		<td>成交价</td>
+    		<td>销售类型</td>
+    		<td>备注</td>
+    		<td>创建时间</td>
+    		<td>创建人</td>
+    	</tr>
+    	<!-- 切记！！！freemarker需要安全输出，要使用（）！‘’形式判断字段是否为空，否则显示不出来 -->
+    	<#list sellList as sell>
+    		<tr>
+    			<td>${(sell.id)!'空'}</td>
+    			<td>${(sell.goodsid)!'空'}</td>
+    			<td>${(sell.goodsnum)!'空'}</td>
+    			<td>${(sell.goodsPrice)!'空'}</td>
+    			<td>${(sell.finalPrice)!'空'}</td>
+    			<td>${(sell.outType)!'空'}</td>
+    			<td>${(sell.remark)!'空'}</td>
+    			<td>${(sell.createtime)!'空'}</td>
+    			<td>${(sell.createid)!'空'}</td>
+    		</tr>
+    	</#list>
+    </table>
+  </body>
+</html>

@@ -19,6 +19,8 @@ public class NevController extends Controller{
 			exitSys();
 		} else if(para.equals("main")){
 			renderFreeMarker("menus.html");
+		} else if(para.equals("goods")){
+			forwardAction("/goods");
 		}
 	}
 	

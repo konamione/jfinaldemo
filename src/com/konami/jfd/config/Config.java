@@ -10,11 +10,16 @@ import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.render.ViewType;
+import com.konami.jfd.controller.GoodsController;
 import com.konami.jfd.controller.InventoryController;
 import com.konami.jfd.controller.NevController;
+import com.konami.jfd.controller.SellController;
 import com.konami.jfd.controller.UserController;
 import com.konami.jfd.interceptor.GloablInterceptor;
+import com.konami.jfd.vo.Goods;
 import com.konami.jfd.vo.Inventory;
+import com.konami.jfd.vo.Sell;
+import com.konami.jfd.vo.Storage;
 import com.konami.jfd.vo.User;
 
 /**
@@ -43,6 +48,8 @@ public class Config extends JFinalConfig{
 		me.add("/user", UserController.class);
 		me.add("/nev",NevController.class);
 		me.add("/inv",InventoryController.class);
+		me.add("/goods",GoodsController.class);
+		me.add("/sell",SellController.class);
 	}
 
 	/**
@@ -56,6 +63,9 @@ public class Config extends JFinalConfig{
 		me.add(arp);
 		arp.addMapping("t_user", User.class);
 		arp.addMapping("t_inventory", Inventory.class);
+		arp.addMapping("t_goods", Goods.class);
+		arp.addMapping("t_sell", Sell.class);
+		arp.addMapping("t_storage", Storage.class);
 	}
 
 	/**

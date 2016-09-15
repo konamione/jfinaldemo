@@ -13,8 +13,22 @@
   
   <body>
     <h1>入库列表</h1>
+    <form action="${contextPath}/inv/addInv" method="post">
+    	<fieldset>
+    		<legend>新增入库</legend>
+    		商品：
+    		<select name="inventory.goodsid">
+	    		<#list goodsList as goods>
+					<option value="${(goods.id)!''}">${(goods.goodsname)!''}</option>
+				</#list>
+    		</select>
+    		数量：<input type="text" name="inventory.goodsnum"/>
+    		<input type="hidden" name="inventory.inType" value="buy"/>
+    		备注：<input type="text" name="inventory.remark"/>
+    		<input type="submit" name="ok" value="添加"/>
+    	</fieldset>
+    </form>
     ${(msg.msgContent)!''}
-    <a href="${contextPath}/inv/goAddInv">新增入库</a>
     <table>
     	<tr>
     		<td>编号</td>
