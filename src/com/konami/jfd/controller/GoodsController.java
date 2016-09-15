@@ -3,8 +3,11 @@ package com.konami.jfd.controller;
 import java.util.Date;
 import java.util.List;
 
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Record;
 import com.konami.jfd.biz.GoodsBiz;
+import com.konami.jfd.interceptor.GoodsValidator;
 import com.konami.jfd.vo.Goods;
 import com.konami.jfd.vo.MessageDto;
 import com.konami.jfd.vo.User;
@@ -12,12 +15,13 @@ import com.konami.jfd.vo.User;
 public class GoodsController extends Controller {
 	private GoodsBiz gb = new GoodsBiz();
 	public void index(){
-		List<Goods> goodsList = gb.loadAllGoods();
+		//List<Goods> goodsList = gb.loadAllGoods();
+		List<Record> goodsList = gb.loadAllGoods();
 		setAttr("goodsList", goodsList);
-		setAttr("msg", null);
 		renderFreeMarker("/goods/index.html");
 	}
 	
+	@Before(GoodsValidator.class)
 	public void addgoods(){
 		Goods g = getModel(Goods.class);
 		g.set("createid", ((User)getSession().getAttribute("currentUser")).get("id"));

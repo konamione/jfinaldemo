@@ -2,6 +2,7 @@ package com.konami.jfd.controller;
 
 import java.util.List;
 
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.konami.jfd.biz.GoodsBiz;
 import com.konami.jfd.biz.SellBiz;
@@ -15,7 +16,7 @@ public class SellController extends Controller {
 	private GoodsBiz gb = new GoodsBiz();
 	public void index(){
 		List<Sell> sellList = sb.loadAllSell();
-		List<Goods> goodsList = gb.loadAllGoods();
+		List<Goods> goodsList = gb.loadAll();
 		setAttr("sellList", sellList);
 		setAttr("goodsList", goodsList);
 		renderFreeMarker("/sell/index.html");

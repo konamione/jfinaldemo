@@ -13,6 +13,8 @@
   
   <body>
     <h1>入库列表</h1>
+    <p><a href="${contextPath}/nev/main">返回</a></p>
+    ${(msg.msgContent)!''}
     <form action="${contextPath}/inv/addInv" method="post">
     	<fieldset>
     		<legend>新增入库</legend>
@@ -22,18 +24,18 @@
 					<option value="${(goods.id)!''}">${(goods.goodsname)!''}</option>
 				</#list>
     		</select>
-    		数量：<input type="text" name="inventory.goodsnum"/>
+    		数量：<input type="text" name="inventory.goodsnum"/><span style="color:red;">${numMsg!''}</span>
     		<input type="hidden" name="inventory.inType" value="buy"/>
     		备注：<input type="text" name="inventory.remark"/>
-    		<input type="submit" name="ok" value="添加"/>
+    		<input type="submit" name="ok" value="添加"/><!-- <span style="color:red;">${repeatMsg!''}</span> -->
     	</fieldset>
     </form>
-    ${(msg.msgContent)!''}
     <table>
     	<tr>
     		<td>编号</td>
-    		<td>商品id</td>
+    		<td>商品名称</td>
     		<td>库存数量</td>
+    		<td>规格型号</td>
     		<td>入库类型</td>
     		<td>备注</td>
     		<td>创建时间</td>
@@ -43,12 +45,13 @@
     	<#list invList as inv>
     		<tr>
     			<td>${(inv.id)!'空'}</td>
-    			<td>${(inv.goodsid)!'空'}</td>
-    			<td>${(inv.goodsnum)!'空'}</td>
-    			<td>${(inv.inType)!'空'}</td>
+    			<td>${(inv.gname)!'空'}</td>
+    			<td>${(inv.gnum)!'空'}</td>
+    			<td>${(inv.spec)!'空'}</td>
+    			<td>${(inv.type)!'空'}</td>
     			<td>${(inv.remark)!'空'}</td>
-    			<td>${(inv.createtime)!'空'}</td>
-    			<td>${(inv.createid)!'空'}</td>
+    			<td>${(inv.ctime)!'空'}</td>
+    			<td>${(inv.rname)!'空'}</td>
     		</tr>
     	</#list>
     </table>

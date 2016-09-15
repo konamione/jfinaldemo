@@ -8,6 +8,7 @@ import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.render.ViewType;
 import com.konami.jfd.controller.GoodsController;
@@ -74,6 +75,7 @@ public class Config extends JFinalConfig{
 	@Override
 	public void configInterceptor(Interceptors me) {
 		me.add(new GloablInterceptor());
+		me.add(new Tx());
 	}
 
 	/**

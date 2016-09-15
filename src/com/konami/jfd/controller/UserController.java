@@ -2,8 +2,10 @@ package com.konami.jfd.controller;
 
 import java.util.List;
 
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.konami.jfd.biz.UserBiz;
+import com.konami.jfd.interceptor.LoginValidator;
 import com.konami.jfd.vo.MessageDto;
 import com.konami.jfd.vo.User;
 
@@ -54,6 +56,7 @@ public class UserController extends Controller {
 		forwardAction("/user");
 	}
 	
+	@Before(LoginValidator.class)
 	public void login(){
 		User u = getModel(User.class);
 		User currentUser = ub.login(u);

@@ -14,14 +14,15 @@
   <body>
     <h1>商品列表</h1>
     ${(msg.msgContent)!''}
+    <p><a href="${contextPath}/nev/main">返回</a></p>
     <form action="${contextPath}/goods/addgoods" method="post">
     	<fieldset>
     		<legend>添加商品</legend>
-    		商品名称：<input type="text" name="goods.goodsname"/>
+    		商品名称：<input type="text" name="goods.goodsname" value="${(goods.goodsname)!''}"/><span style="color:red;">${nameMsg!''}</span>
 		   	规格型号：<input type="text" name="goods.goodsspec" value="斤" disabled="disabled"/>
-		   	成本价：<input type="text" name="goods.CostPrice"/>
-		   	零售价：<input type="text" name="goods.retailPrice"/>
-		   	<input type="submit" name="ok" value="添加"/>
+		   	成本价：<input type="text" name="goods.CostPrice" value="${(goods.CostPrice)!''}"/><span style="color:red;">${costMsg!''}</span>
+		   	零售价：<input type="text" name="goods.retailPrice" value="${(goods.retailPrice)!''}"/><span style="color:red;">${retailMsg!''}</span>
+		   	<input type="submit" name="ok" value="添加" onclick/>
     	</fieldset>
     </form>
     <table>
@@ -41,14 +42,18 @@
     	<#list goodsList as goods>
     		<tr>
     			<td>${(goods.id)!'空'}</td>
-    			<td>${(goods.goodsname)!'空'}</td>
-    			<td>${(goods.goodsspec)!'空'}</td>
-    			<td>${(goods.CostPrice)!'空'}</td>
-    			<td>${(goods.retailPrice)!'空'}</td>
-    			<td>${(goods.createtime)!'空'}</td>
-    			<td>${(goods.createid)!'空'}</td>
-    			<td>${(goods.modifytime)!'空'}</td>
-    			<td>${(goods.modifyid)!'空'}</td>
+    			<td>${(goods.name)!'空'}</td>
+    			<td>${(goods.spec)!'空'}</td>
+    			<td>${(goods.cost)!'空'}</td>
+    			<td>${(goods.retail)!'空'}</td>
+    			<td>${(goods.ctime)!'空'}</td>
+    			<td>${(goods.rname)!'空'}</td>
+    			<td>${(goods.mtime)!'空'}</td>
+    			<#if (goods.mtime)??>
+	    			<td>${(goods.rname)!'空'}</td>
+	    		<#else>
+	    			<td>空</td>
+    			</#if>
     			<td><a href="${contextPath}/goods/modifyGoods/${goods.id}">修改</a></td>
     		</tr>
     	</#list>

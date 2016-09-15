@@ -13,28 +13,44 @@
 			var num = document.getElementById('num').value;
 			var price = document.getElementById('price').value;
 			if(num == null || num == undefined || num == "" || price == null || price == undefined || price == ""){
-				alert("商品数量或单价不能为空！");
+				//alert("商品数量或单价不能为空！");
+				document.getElementById('priceMsg').innerText = "商品数量或单价不能为空！";
 			}else{
+				document.getElementById('priceMsg').innerText = "";
 				var fp = parseInt(num) * parseFloat(price);
 				document.getElementById('finalPrice').value = fp;
 			}
+		}
+		function validator(){
+			var gid = document.getElementById('gid');
+			for ( var int = 0; int < gid.childNodes.length; int++) {
+				if(gid.childNodes[int].selected == true && gid.childNodes[int].value == "none"){
+					document.getElementById('goodsMsg').innerText = "请选择商品";
+					return false;
+				}
+			}
+			document.getElementById('goodsMsg').innerText = "";
+			return true;
 		}
 	</script>
   </head>
   
   <body>
     <h1>出库列表</h1>
+    <p><a href="${contextPath}/nev/main">返回</a></p>
+    ${(msg.msgContent)!''}
     <form action="${contextPath}/sell/addSell" method="post">
     	<fieldset>
     		<legend>新增出库</legend>
     		商品：
-    		<select name="sell.goodsid">
+    		<select name="sell.goodsid" id="gid">
+    			<option value="none" name="op">--请选择--</option>
 	    		<#list goodsList as goods>
-					<option value="${(goods.id)!''}">${(goods.goodsname)!''}</option>
+					<option name="op" value="${(goods.id)!''}">${(goods.goodsname)!''}-${(goods.CostPrice)!''}-${(goods.retailPrice)}</option>
 				</#list>
-    		</select>
+    		</select><span style="color:red;" id="goodsMsg"></span>
     		数量：<input type="text" name="sell.goodsnum" id="num"/>
-    		单价：<input type="text" name="sell.goodsPrice" onblur="caleFinalPrice()" id="price"/>
+    		单价：<input type="text" name="sell.goodsPrice" onblur="caleFinalPrice()" id="price"/><span style="color:red;" id="priceMsg"></span>
     		成交价格：<input type="text" name="sell.finalPrice" readonly="readonly" id="finalPrice"/>
     		销售类型：
     		<select name="sell.outType">
@@ -42,10 +58,9 @@
     			<option value="back">退货</option>
     		</select>
     		备注：<input type="text" name="sell.remark"/>
-    		<input type="submit" name="ok" value="添加"/>
+    		<input type="submit" name="ok" value="添加" onclick="return validator()"/>
     	</fieldset>
     </form>
-    ${(msg.msgContent)!''}
     <table>
     	<tr>
     		<td>编号</td>
@@ -68,7 +83,7 @@
     			<td>${(sell.finalPrice)!'空'}</td>
     			<td>${(sell.outType)!'空'}</td>
     			<td>${(sell.remark)!'空'}</td>
-    			<td>${(sell.createtime)!'空'}</td>
+    			<td>${(sell.createTime)!'空'}</td>
     			<td>${(sell.createid)!'空'}</td>
     		</tr>
     	</#list>

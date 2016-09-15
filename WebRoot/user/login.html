@@ -13,8 +13,8 @@
   
   <body>
     <form action="${contextPath}/user/login" method="post">
-    	<p>账号：<input type="text" name="user.username"/></p>
-    	<p>密码：<input type="password" name="user.userpass"/></p>
+    	<p>账号：<input type="text" name="user.username"/><span style="color:red;">${nameMsg!''}</span></p>
+    	<p>密码：<input type="password" name="user.userpass"/><span style="color:red;">${passMsg!''}</span></p>
     	<p><input type="submit" name="OK" value="登陆"/></<p>
     </form>
     ${fMsg!''}
