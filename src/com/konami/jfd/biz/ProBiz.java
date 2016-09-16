@@ -11,11 +11,11 @@ import com.konami.jfd.vo.MessageDto;
 import com.konami.jfd.vo.Sell;
 import com.konami.jfd.vo.Storage;
 
-public class SellBiz {
+public class ProBiz {
 	public List<Sell> loadAllSell() {
-		return Sell.dao.find("select * from t_sell where outType in (?,?)","sell","back");
+		return Sell.dao.find("select * from t_sell where outType in (?,?)","pro","proback");
 	}
-
+	
 	@Before(Tx.class)
 	public MessageDto addSell(Sell s) {
 		try {
@@ -28,7 +28,7 @@ public class SellBiz {
 				msg.setMsgContent("销售的商品不存在！请查证后再操作!");
 			} else {
 				Storage sto = stoList.get(0);
-				if (s.getStr("outType").equals("sell")) {
+				if (s.getStr("outType").equals("pro")) {
 					if (sto.getLong("num") <= 0
 							|| sto.getLong("num") < s.getLong("goodsnum")) {
 						msg.setMsgFlag(false);
@@ -47,13 +47,13 @@ public class SellBiz {
 							msg.setMsgContent("销售失败");
 						}
 					}
-				} else if (s.getStr("outType").equals("back")) {
+				} else if (s.getStr("outType").equals("proback")) {
 					s.set("createTime", new Date());
 					boolean b = s.save();
 					Inventory inv = new Inventory();
 					inv.set("goodsid", s.getLong("goodsid"));
 					inv.set("goodsnum", Math.abs(s.getLong("goodsnum")));
-					inv.set("inType", "back");
+					inv.set("inType", "proback");
 					inv.set("remark", s.getStr("remark"));
 					inv.set("createid", s.getLong("createid"));
 					inv.set("createtime", new Date());

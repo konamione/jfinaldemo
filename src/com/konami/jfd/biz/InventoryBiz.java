@@ -17,7 +17,7 @@ public class InventoryBiz {
 //		return Inventory.dao.find("select * from t_inventory");
 //	}
 	public List<Record> loadAllInv(){
-		return Db.find("select inv.id as id, inv.goodsid as gid, g.goodsname as gname, g.goodsspec as spec, inv.goodsnum as gnum, case inv.inType when 'buy' then '进货' when 'back' then '销售退货' when 'pback' then '铺货退货' END as type, inv.remark as remark, inv.createid as cid, inv.createtime as ctime, u.realname as rname from t_inventory inv left join t_user u on inv.createid = u.id left join t_goods g on g.id = inv.goodsid");
+		return Db.find("select inv.id as id, inv.goodsid as gid, g.goodsname as gname, g.goodsspec as spec, inv.goodsnum as gnum, case inv.inType when 'buy' then '进货' when 'back' then '销售退货' when 'proback' then '铺货退货' END as type, inv.remark as remark, inv.createid as cid, inv.createtime as ctime, u.realname as rname from t_inventory inv left join t_user u on inv.createid = u.id left join t_goods g on g.id = inv.goodsid");
 	}
 	
 	@Before(Tx.class)

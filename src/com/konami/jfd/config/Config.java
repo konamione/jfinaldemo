@@ -11,12 +11,15 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.render.ViewType;
+import com.konami.jfd.controller.CashController;
 import com.konami.jfd.controller.GoodsController;
 import com.konami.jfd.controller.InventoryController;
 import com.konami.jfd.controller.NevController;
+import com.konami.jfd.controller.ProController;
 import com.konami.jfd.controller.SellController;
 import com.konami.jfd.controller.UserController;
 import com.konami.jfd.interceptor.GloablInterceptor;
+import com.konami.jfd.vo.Cash;
 import com.konami.jfd.vo.Goods;
 import com.konami.jfd.vo.Inventory;
 import com.konami.jfd.vo.Sell;
@@ -51,6 +54,8 @@ public class Config extends JFinalConfig{
 		me.add("/inv",InventoryController.class);
 		me.add("/goods",GoodsController.class);
 		me.add("/sell",SellController.class);
+		me.add("/pro",ProController.class);
+		me.add("/cash",CashController.class);
 	}
 
 	/**
@@ -67,6 +72,7 @@ public class Config extends JFinalConfig{
 		arp.addMapping("t_goods", Goods.class);
 		arp.addMapping("t_sell", Sell.class);
 		arp.addMapping("t_storage", Storage.class);
+		arp.addMapping("t_cash", Cash.class);
 	}
 
 	/**

@@ -12,7 +12,7 @@ public class NevController extends Controller{
 		} else if(para.equals("sell")){
 			forwardAction("/sell");
 		} else if(para.equals("pay")){
-			forwardAction("/pay");
+			forwardAction("/cash");
 		} else if(para.equals("report")){
 			forwardAction("/report");
 		} else if(para.equals("exit")){
@@ -21,6 +21,8 @@ public class NevController extends Controller{
 			renderFreeMarker("menus.html");
 		} else if(para.equals("goods")){
 			forwardAction("/goods");
+		} else if(para.equals("pro")){
+			forwardAction("/pro");
 		}
 	}
 	

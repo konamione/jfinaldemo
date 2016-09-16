@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>index.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+    <h1>入库列表</h1>
+    <p><a href="${contextPath}/nev/main">返回</a></p>
+    ${(msg.msgContent)!''}
+    <form action="${contextPath}/cash/addCash" method="post">
+    	<fieldset>
+    		<legend>新增支出</legend>
+    		事由：<input type="text" name="cash.res" value="${(cash.res)!''}"/><span style="color:red;">${resMsg!''}</span>
+    		金额：<input type="text" name="cash.money" value="${(cash.money)!''}"/><span style="color:red;">${moneyMsg!''}</span>
+    		备注：<input type="text" name="cash.remark" value="${(cash.remark)!''}"/>
+    		<input type="submit" name="ok" value="添加"/><!-- <span style="color:red;">${repeatMsg!''}</span> -->
+    	</fieldset>
+    </form>
+    <table>
+    	<tr>
+    		<td>编号</td>
+    		<td>事由</td>
+    		<td>金额</td>
+    		<td>备注</td>
+    		<td>创建时间</td>
+    		<td>创建人</td>
+    	</tr>
+    	<!-- 切记！！！freemarker需要安全输出，要使用（）！‘’形式判断字段是否为空，否则显示不出来 -->
+    	<#list cashList as cash>
+    		<tr>
+    			<td>${(cash.id)!'空'}</td>
+    			<td>${(cash.res)!'空'}</td>
+    			<td>${(cash.money)!'空'}</td>
+    			<td>${(cash.remark)!'空'}</td>
+    			<td>${(cash.createtime)!'空'}</td>
+    			<td>${(cash.cname)!'空'}</td>
+    		</tr>
+    	</#list>
+    </table>
+  </body>
+</html>
