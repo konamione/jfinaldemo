@@ -16,6 +16,7 @@ import com.konami.jfd.controller.GoodsController;
 import com.konami.jfd.controller.InventoryController;
 import com.konami.jfd.controller.NevController;
 import com.konami.jfd.controller.ProController;
+import com.konami.jfd.controller.ReportController;
 import com.konami.jfd.controller.SellController;
 import com.konami.jfd.controller.UserController;
 import com.konami.jfd.interceptor.GloablInterceptor;
@@ -56,6 +57,7 @@ public class Config extends JFinalConfig{
 		me.add("/sell",SellController.class);
 		me.add("/pro",ProController.class);
 		me.add("/cash",CashController.class);
+		me.add("/report",ReportController.class);
 	}
 
 	/**
