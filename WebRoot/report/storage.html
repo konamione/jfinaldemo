@@ -28,15 +28,21 @@
     <table>
     	<tr>
     		<td>编号</td>
-    		<td>商品id</td>
+    		<td>商品名称</td>
+    		<td>成本价</td>
+    		<td>零售价</td>
     		<td>库存数量</td>
+    		<td>规格型号</td>
     		<td>创建时间</td>
     	</tr>
     	<#list stoList as sto>
     		<tr>
     			<td>${(sto.id)!'空'}</td>
-    			<td>${(sto.goodsid)!'空'}</td>
+    			<td>${(sto.gname)!'空'}</td>
+    			<td>${(sto.cprice)!'空'}</td>
+    			<td>${(sto.rPrice)!'空'}</td>
     			<td>${(sto.num)!'空'}</td>
+    			<td>${(sto.gspec)!'空'}</td>
     			<td>${(sto.createtime)!'空'}</td>
     		</tr>
     	</#list>

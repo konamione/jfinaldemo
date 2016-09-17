@@ -20,11 +20,11 @@ public class ReportController extends Controller {
 		if (para.equals("storage")) {
 			forwardAction("/report/toStorage");
 		} else if(para.equals("inventory")){
-			renderFreeMarker("/report/inventory.html");
+			forwardAction("/report/toInventory");
 		} else if(para.equals("sell")){
-			renderFreeMarker("/report/sell.html");
+			forwardAction("/report/toSell");
 		} else if(para.equals("cash")){
-			renderFreeMarker("/report/cash.html");
+			forwardAction("/report/toCash");
 		}
 	}
 	
@@ -40,5 +40,9 @@ public class ReportController extends Controller {
 		List<Goods> goodsList = gb.loadAll();
 		setAttr("goodsList", goodsList);
 		renderFreeMarker("/report/storage.html");
+	}
+	
+	public void toInventory(){
+		renderFreeMarker("/report/inventory.html");
 	}
 }
