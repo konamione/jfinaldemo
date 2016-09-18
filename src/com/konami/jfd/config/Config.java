@@ -68,6 +68,7 @@ public class Config extends JFinalConfig{
 		C3p0Plugin cp = new C3p0Plugin(loadPropertyFile("a_little_config.txt"));
 		me.add(cp);
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(cp);
+		//arp.setShowSql(true);
 		me.add(arp);
 		arp.addMapping("t_user", User.class);
 		arp.addMapping("t_inventory", Inventory.class);
