@@ -13,7 +13,7 @@ import com.konami.jfd.vo.Storage;
 
 public class ProBiz {
 	public List<Sell> loadAllSell() {
-		return Sell.dao.find("select * from t_sell where outType in (?,?)","pro","proback");
+		return Sell.dao.find("select s.id as id, g.goodsname as gname, g.goodsspec as gspec, g.CostPrice as cprice, g.retailPrice as rprice, s.goodsnum as goodsnum, s.goodsPrice as goodsPrice, s.finalPrice as finalPrice, case s.outType when 'pro' then '铺货' when 'proback' then '铺货退货' end as outType, s.remark as remark, s.custname as custname, s.createtime as createTime, u.realname as rname from t_sell s left join t_goods g on s.goodsid = g.id left join t_user u on s.createid = u.id where outType in (?,?)","pro","proback");
 	}
 	
 	@Before(Tx.class)

@@ -7,6 +7,7 @@ import com.jfinal.core.Controller;
 import com.konami.jfd.biz.GoodsBiz;
 import com.konami.jfd.biz.ReportBiz;
 import com.konami.jfd.biz.UserBiz;
+import com.konami.jfd.vo.Cash;
 import com.konami.jfd.vo.Goods;
 import com.konami.jfd.vo.Inventory;
 import com.konami.jfd.vo.Sell;
@@ -86,5 +87,21 @@ public class ReportController extends Controller {
 		setAttr("sellList", sellList);
 		setAttr("userList", userList);
 		renderFreeMarker("/report/sell.html");
+	}
+	
+	public void toCash(){
+		Cash c = getModel(Cash.class);
+		Date ft =  getParaToDate("createtimefrom");
+		Date tt =  getParaToDate("createtimeto");
+		List<Cash> cashList = null;
+		if (c.getStr("res") == null && c.getStr("remark") == null && c.getLong("createid") == null && ft == null && tt == null) {
+			cashList = rb.loadAllCash();
+		} else {
+			cashList = rb.loadCashByPara(c,ft,tt);
+		}
+		List<User> userList = ub.loadAllUser();
+		setAttr("userList", userList);
+		setAttr("cashList", cashList);
+		renderFreeMarker("/report/cash.html");
 	}
 }

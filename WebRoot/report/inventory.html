@@ -54,7 +54,10 @@
     		<td>创建人</td>
     	</tr>
     	<!-- 切记！！！freemarker需要安全输出，要使用（）！‘’形式判断字段是否为空，否则显示不出来 -->
+    	<#assign n = 1/>
+    	<#assign sum = 0/>
     	<#list invList as inv>
+    		<#if (n != (invList?size))>
     		<tr>
     			<td>${(inv.id)!'空'}</td>
     			<td>${(inv.gname)!'空'}</td>
@@ -65,6 +68,20 @@
     			<td>${(inv.ctime)!'空'}</td>
     			<td>${(inv.rname)!'空'}</td>
     		</tr>
+    		<#assign n = n + 1/>
+    		<#assign sum = sum + inv.gnum/>
+    		<#else>
+    		<tr>
+    			<td>合计</td>
+    			<td></td>
+    			<td style="color:red;">${sum}</td>
+    			<td>斤</td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    		</tr>
+    		</#if>
     	</#list>
     </table>
   </body>

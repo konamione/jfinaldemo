@@ -28,6 +28,8 @@
     			<option value="0">--全部--</option>
 				<option value="sell">销售</option>
 				<option value="back">退货</option>
+				<option value="pro">铺货</option>
+				<option value="proback">铺货退货</option>
     		</select>
     		备注：<input type="text" name="sell.remark"/>
     		从：<input type="text" name="createtimefrom"/>至<input type="text" name="createtimeto"/>
@@ -57,7 +59,11 @@
     		<td>创建人</td>
     	</tr>
     	<!-- 切记！！！freemarker需要安全输出，要使用（）！‘’形式判断字段是否为空，否则显示不出来 -->
+    	<#assign n = 1/>
+    	<#assign sum = 0/>
+    	<#assign sum1 = 0/>
     	<#list sellList as sell>
+    		<#if (n != (sellList?size))>
     		<tr>
     			<td>${(sell.id)!'空'}</td>
     			<td>${(sell.gname)!'空'}</td>
@@ -72,6 +78,25 @@
     			<td>${(sell.createTime)!'空'}</td>
     			<td>${(sell.rname)!'空'}</td>
     		</tr>
+    		<#assign n = n + 1/>
+    		<#assign sum = sum + sell.goodsnum/>
+    		<#assign sum1 = sum1 + sell.finalPrice/>
+    		<#else>
+    		<tr>
+    			<td>合计</td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    		<td style="color:red;">${sum}</td>
+	    		<td>斤</td>
+	    		<td style="color:red;">${sum1}</td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+    		</tr>
+    		</#if>
     	</#list>
     </table>
   </body>
