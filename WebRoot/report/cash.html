@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>inventory.html</title>
+    <title>cash.html</title>
 	
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="this is my page">
@@ -72,31 +72,18 @@ a:active {
   <body>
   <div id="main">
   <div>
-  <h1>入库报表</h1>
-  <a href="${contextPath}/report">返回</a>
-  </div>
-  <div id="middle">
-    <form action="${contextPath}/report/toInventory" method="post">
+    <h1>现金报表</h1>
+    <a href="${contextPath}/report">返回</a>
+    </div>
+    <div id="middle">
+    <form action="${contextPath}/report/toCash" method="post">
     	<fieldset>
     		<legend>查询条件</legend>
-    		商品名称：
-    		<select name="inventory.goodsid">
-    			<option value="0">--全部--</option>
-	    		<#list goodsList as goods>
-					<option value="${(goods.id)!''}">${(goods.goodsname)!''}</option>
-				</#list>
-    		</select>
-    		入库类型：
-    		<select name="inventory.inType">
-    			<option value="0">--全部--</option>
-				<option value="buy">进货</option>
-				<option value="back">退货</option>
-				<option value="proback">铺货退货</option>
-    		</select>
-    		备注：<input type="text" name="inventory.remark"/>
-   			从：<input type="text" name="createtimefrom"/>至<input type="text" name="createtimeto"/><br/>
-   			入库人：
-   			<select name="inventory.createid">
+    		支出事由：<input type="text" name="cash.res"/>
+    		备注：<input type="text" name="cash.remark"/>
+    		从：<input type="text" name="createtimefrom"/>至<input type="text" name="createtimeto"/>
+   			记录人：
+   			<select name="cash.createid">
     			<option value="0">--全部--</option>
 	    		<#list userList as user>
 					<option value="${(user.id)!''}">${(user.realname)!''}</option>
@@ -110,64 +97,53 @@ a:active {
     <table>
     	<tr id="tt">
     		<td>编号</td>
-    		<td>商品名称</td>
-    		<td>入库数量</td>
-    		<td>规格型号</td>
-    		<td>入库类型</td>
+    		<td>支出事由</td>
+    		<td>支出金额</td>
     		<td>备注</td>
     		<td>创建时间</td>
     		<td>创建人</td>
     	</tr>
     	<!-- 切记！！！freemarker需要安全输出，要使用（）！‘’形式判断字段是否为空，否则显示不出来 -->
     	<#assign sum = 0/>
-    	<#list invList as inv>
-    	<#if (inv_index % 2) == 0>
+    	<#list cashList as cash>
+    	<#if (cash_index % 2) == 0>
     		<tr style="background-color:#eee">
-    			<td>${(inv.id)!'空'}</td>
-    			<td>${(inv.gname)!'空'}</td>
-    			<td>${(inv.gnum)!'空'}</td>
-    			<td>${(inv.spec)!'空'}</td>
-    			<td>${(inv.type)!'空'}</td>
-    			<td>${(inv.remark)!'空'}</td>
-    			<td>${(inv.ctime)!'空'}</td>
-    			<td>${(inv.rname)!'空'}</td>
+    			<td>${(cash.id)!'空'}</td>
+    			<td>${(cash.res)!'空'}</td>
+    			<td>${(cash.money)!'空'}</td>
+    			<td>${(cash.remark)!'空'}</td>
+    			<td>${(sell.createtime)!'空'}</td>
+    			<td>${(sell.rname)!'空'}</td>
     		</tr>
-    		<#assign sum = sum + inv.gnum/>
-    		<#if !inv_has_next>
+    		<#assign sum = sum + cash.money/>
+    		<#if !cash_has_next>
     		<tr>
     			<td>合计</td>
-    			<td></td>
-    			<td style="color:red;">${sum}</td>
-    			<td>斤</td>
-    			<td></td>
-    			<td></td>
-    			<td></td>
-    			<td></td>
+	    		<td></td>
+	    		<td style="color:red;">${sum}</td>
+	    		<td>元</td>
+	    		<td></td>
+	    		<td></td>
     		</tr>
     		</#if>
     		<#else>
     		<tr>
-    			<td>${(inv.id)!'空'}</td>
-    			<td>${(inv.gname)!'空'}</td>
-    			<td>${(inv.gnum)!'空'}</td>
-    			<td>${(inv.spec)!'空'}</td>
-    			<td>${(inv.type)!'空'}</td>
-    			<td>${(inv.remark)!'空'}</td>
-    			<td>${(inv.ctime)!'空'}</td>
-    			<td>${(inv.rname)!'空'}</td>
+    			<td>${(cash.id)!'空'}</td>
+    			<td>${(cash.res)!'空'}</td>
+    			<td>${(cash.money)!'空'}</td>
+    			<td>${(cash.remark)!'空'}</td>
+    			<td>${(sell.createtime)!'空'}</td>
+    			<td>${(sell.rname)!'空'}</td>
     		</tr>
-    		<#assign sum = sum + inv.gnum/>
-    		<#if !inv_has_next>
-    		
+    		<#assign sum = sum + cash.money/>
+    		<#if !cash_has_next>
     		<tr>
     			<td>合计</td>
-    			<td></td>
-    			<td style="color:red;">${sum}</td>
-    			<td>斤</td>
-    			<td></td>
-    			<td></td>
-    			<td></td>
-    			<td></td>
+	    		<td></td>
+	    		<td style="color:red;">${sum}</td>
+	    		<td>元</td>
+	    		<td></td>
+	    		<td></td>
     		</tr>
     		</#if>
     		</#if>

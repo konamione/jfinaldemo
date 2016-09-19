@@ -8,11 +8,74 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     
     <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<style type="text/css">
+body {
+	font-family: "微软雅黑";
+}
 
+#main {
+	text-align: center;
+}
+
+#middle {
+	width: 1000px;
+	position: relative;
+	left: 180px;
+}
+
+#bottom {
+	width: 1000px;
+	position: relative;
+	left: 180px;
+}
+
+table {
+	text-align: center;
+}
+
+#tt {
+	background-color: #7EC0EE;
+	font-weight: bold;
+}
+
+a:link {
+	font-family: "微软雅黑";
+	font-weight: bold;
+	color: #7EC0EE;
+	text-decoration: none;
+}
+
+a:visited {
+	font-family: "微软雅黑";
+	font-weight: bold;
+	color: #7EC0EE;
+	text-decoration: none;
+}
+
+a:hover {
+	font-family: "微软雅黑";
+	font-weight: bold;
+	color: #EE9A00;
+	text-decoration: underline;
+}
+
+a:active {
+	font-family: "微软雅黑";
+	font-weight: bold;
+	color: #EE9A00;
+	text-decoration: underline;
+	background-color: #eee;
+}
+</style>
   </head>
   
   <body>
+  <div id="main">
+  <div>
+  <h1>销售报表</h1>
     <a href="${contextPath}/report">返回</a>
+    </div>
+    <div id="middle">
     <form action="${contextPath}/report/toSell" method="post">
     	<fieldset>
     		<legend>查询条件</legend>
@@ -32,7 +95,7 @@
 				<option value="proback">铺货退货</option>
     		</select>
     		备注：<input type="text" name="sell.remark"/>
-    		从：<input type="text" name="createtimefrom"/>至<input type="text" name="createtimeto"/>
+    		从：<input type="text" name="createtimefrom"/>至<input type="text" name="createtimeto"/><br/>
    			出库人：
    			<select name="sell.createid">
     			<option value="0">--全部--</option>
@@ -43,8 +106,10 @@
    			<input type="submit" name="ok" value="查询"/>
     	</fieldset>
     </form>
+    </div>
+    <div id="bottom">
     <table>
-    	<tr>
+    	<tr id="tt">
     		<td>编号</td>
     		<td>商品名称</td>
     		<td>规格型号</td>
@@ -54,17 +119,17 @@
     		<td>销售单价</td>
     		<td>成交价</td>
     		<td>销售类型</td>
+    		<td>客户姓名</td>
     		<td>备注</td>
     		<td>创建时间</td>
     		<td>创建人</td>
     	</tr>
     	<!-- 切记！！！freemarker需要安全输出，要使用（）！‘’形式判断字段是否为空，否则显示不出来 -->
-    	<#assign n = 1/>
     	<#assign sum = 0/>
     	<#assign sum1 = 0/>
     	<#list sellList as sell>
-    		<#if (n != (sellList?size))>
-    		<tr>
+    	<#if (sell_index % 2) == 0>
+    		<tr style="background-color:#eee">
     			<td>${(sell.id)!'空'}</td>
     			<td>${(sell.gname)!'空'}</td>
     			<td>${(sell.gspec)!'空'}</td>
@@ -74,14 +139,14 @@
     			<td>${(sell.goodsPrice)!'空'}</td>
     			<td>${(sell.finalPrice)!'空'}</td>
     			<td>${(sell.outType)!'空'}</td>
+    			<td>${(sell.custname)!'空'}</td>
     			<td>${(sell.remark)!'空'}</td>
     			<td>${(sell.createTime)!'空'}</td>
     			<td>${(sell.rname)!'空'}</td>
     		</tr>
-    		<#assign n = n + 1/>
     		<#assign sum = sum + sell.goodsnum/>
     		<#assign sum1 = sum1 + sell.finalPrice/>
-    		<#else>
+    		<#if !sell_has_next>
     		<tr>
     			<td>合计</td>
 	    		<td></td>
@@ -97,7 +162,44 @@
 	    		<td></td>
     		</tr>
     		</#if>
+    		<#else>
+    		<tr>
+    			<td>${(sell.id)!'空'}</td>
+    			<td>${(sell.gname)!'空'}</td>
+    			<td>${(sell.gspec)!'空'}</td>
+    			<td>${(sell.cprice)!'空'}</td>
+    			<td>${(sell.rprice)!'空'}</td>
+    			<td>${(sell.goodsnum)!'空'}</td>
+    			<td>${(sell.goodsPrice)!'空'}</td>
+    			<td>${(sell.finalPrice)!'空'}</td>
+    			<td>${(sell.outType)!'空'}</td>
+    			<td>${(sell.custname)!'空'}</td>
+    			<td>${(sell.remark)!'空'}</td>
+    			<td>${(sell.createTime)!'空'}</td>
+    			<td>${(sell.rname)!'空'}</td>
+    		</tr>
+    		<#assign sum = sum + sell.goodsnum/>
+    		<#assign sum1 = sum1 + sell.finalPrice/>
+    		<#if !sell_has_next>
+    		<tr>
+    			<td>合计</td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    		<td style="color:red;">${sum}</td>
+	    		<td>斤</td>
+	    		<td style="color:red;">${sum1}</td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+    		</tr>
+    		</#if>
+    		</#if>
     	</#list>
     </table>
+    </div>
+    </div>
   </body>
 </html>

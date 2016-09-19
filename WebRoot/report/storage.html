@@ -8,12 +8,74 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     
     <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<style type="text/css">
+body {
+	font-family: "微软雅黑";
+}
 
+#main {
+	text-align: center;
+}
+
+#middle {
+	width: 1000px;
+	position: relative;
+	left: 180px;
+}
+
+#bottom {
+	width: 1000px;
+	position: relative;
+	left: 180px;
+}
+
+table {
+	text-align: center;
+}
+
+#tt {
+	background-color: #7EC0EE;
+	font-weight: bold;
+}
+
+a:link {
+	font-family: "微软雅黑";
+	font-weight: bold;
+	color: #7EC0EE;
+	text-decoration: none;
+}
+
+a:visited {
+	font-family: "微软雅黑";
+	font-weight: bold;
+	color: #7EC0EE;
+	text-decoration: none;
+}
+
+a:hover {
+	font-family: "微软雅黑";
+	font-weight: bold;
+	color: #EE9A00;
+	text-decoration: underline;
+}
+
+a:active {
+	font-family: "微软雅黑";
+	font-weight: bold;
+	color: #EE9A00;
+	text-decoration: underline;
+	background-color: #eee;
+}
+</style>
   </head>
   
   <body>
+  <div id="main">
+  	<div>
   	<h1>库存报表</h1>
   	<a href="${contextPath}/report">返回</a>
+  	</div>
+  	<div id="middle">
     <form action="" method="post">
     	<fieldset>
     		<legend>查询条件</legend>
@@ -27,8 +89,10 @@
     		<input type="submit" name="ok" value="查询" />
     	</fieldset>
     </form>
+    </div>
+    <div id="bottom">
     <table>
-    	<tr>
+    	<tr id="tt">
     		<td>编号</td>
     		<td>商品名称</td>
     		<td>成本价</td>
@@ -38,6 +102,17 @@
     		<td>创建时间</td>
     	</tr>
     	<#list stoList as sto>
+    	<#if (sto_index % 2) == 0>
+    		<tr style="background-color:#eee">
+    			<td>${(sto.id)!'空'}</td>
+    			<td>${(sto.gname)!'空'}</td>
+    			<td>${(sto.cprice)!'空'}</td>
+    			<td>${(sto.rPrice)!'空'}</td>
+    			<td>${(sto.num)!'空'}</td>
+    			<td>${(sto.gspec)!'空'}</td>
+    			<td>${(sto.createtime)!'空'}</td>
+    		</tr>
+    	<#else>
     		<tr>
     			<td>${(sto.id)!'空'}</td>
     			<td>${(sto.gname)!'空'}</td>
@@ -47,7 +122,10 @@
     			<td>${(sto.gspec)!'空'}</td>
     			<td>${(sto.createtime)!'空'}</td>
     		</tr>
+    	</#if>
     	</#list>
     </table>
+    </div>
+  </div>
   </body>
 </html>

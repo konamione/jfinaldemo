@@ -8,14 +8,56 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     
     <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
-
+	<style type="text/css">
+		body{
+			font-family:"微软雅黑";
+		}
+		#main{
+			width:550px;
+			height:220px;
+			border-style:solid;
+			border-width:2px;
+			border-color:#ccc;
+			position:absolute;
+			left:400px;
+			top:180px;
+			text-align:center;
+		}
+		a:link{
+			font-family:"微软雅黑";
+			font-weight:bold;
+			color:#7EC0EE;
+			text-decoration:none;
+		}
+		a:visited{
+			font-family:"微软雅黑";
+			font-weight:bold;
+			color:#7EC0EE;
+			text-decoration:none;
+		}
+		a:hover{
+			font-family:"微软雅黑";
+			font-weight:bold;
+			color:#EE9A00;
+			text-decoration:underline;
+		}
+		a:active{
+			font-family:"微软雅黑";
+			font-weight:bold;
+			color:#EE9A00;
+			text-decoration:underline;
+			background-color:#eee;
+		}
+	</style>
   </head>
   
   <body>
-  	<a href="${contextPath}/nev/main">返回</a>
+  <div id="main">
     <a href="${contextPath}/report/nav/storage">库存查询</a>
     <a href="${contextPath}/report/nav/inventory">入库查询</a>
     <a href="${contextPath}/report/nav/sell">销售查询</a>
-    <a href="${contextPath}/report/nav/cash">支出查询</a>
+    <a href="${contextPath}/report/nav/cash">支出查询</a><br/>
+  	<a href="${contextPath}/nev/main">返回</a>
+  </div>
   </body>
 </html>

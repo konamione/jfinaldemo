@@ -8,52 +8,123 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     
     <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
-
+	<style type="text/css">
+		body{
+			font-family:"微软雅黑";
+		}
+		#main{
+			text-align:center;
+		}
+		#middle{
+			width:1000px;
+			position:relative;
+			left:180px;
+		}
+		#bottom{
+			width:1000px;
+			position:relative;
+			left:180px;
+		}
+		table{
+			text-align:center;
+		}
+		#tt{
+			background-color:#7EC0EE;
+			font-weight:bold;
+		}
+		a:link{
+			font-family:"微软雅黑";
+			font-weight:bold;
+			color:#7EC0EE;
+			text-decoration:none;
+		}
+		a:visited{
+			font-family:"微软雅黑";
+			font-weight:bold;
+			color:#7EC0EE;
+			text-decoration:none;
+		}
+		a:hover{
+			font-family:"微软雅黑";
+			font-weight:bold;
+			color:#EE9A00;
+			text-decoration:underline;
+		}
+		a:active{
+			font-family:"微软雅黑";
+			font-weight:bold;
+			color:#EE9A00;
+			text-decoration:underline;
+			background-color:#eee;
+		}
+	</style>
   </head>
   
   <body>
-    <h1>入库列表</h1>
-    <p><a href="${contextPath}/nev/main">返回</a></p>
-    ${(msg.msgContent)!''}
-    <form action="${contextPath}/inv/addInv" method="post">
-    	<fieldset>
-    		<legend>新增入库</legend>
-    		商品：
-    		<select name="inventory.goodsid">
-	    		<#list goodsList as goods>
-					<option value="${(goods.id)!''}">${(goods.goodsname)!''}</option>
-				</#list>
-    		</select>
-    		数量：<input type="text" name="inventory.goodsnum"/><span style="color:red;">${numMsg!''}</span>
-    		<input type="hidden" name="inventory.inType" value="buy"/>
-    		备注：<input type="text" name="inventory.remark"/>
-    		<input type="submit" name="ok" value="添加"/><!-- <span style="color:red;">${repeatMsg!''}</span> -->
-    	</fieldset>
-    </form>
-    <table>
-    	<tr>
-    		<td>编号</td>
-    		<td>商品名称</td>
-    		<td>库存数量</td>
-    		<td>规格型号</td>
-    		<td>入库类型</td>
-    		<td>备注</td>
-    		<td>创建时间</td>
-    		<td>创建人</td>
-    	</tr>
-    	<!-- 切记！！！freemarker需要安全输出，要使用（）！‘’形式判断字段是否为空，否则显示不出来 -->
-    	<#list invList as inv>
-    		<tr>
-    			<td>${(inv.id)!'空'}</td>
-    			<td>${(inv.gname)!'空'}</td>
-    			<td>${(inv.gnum)!'空'}</td>
-    			<td>${(inv.spec)!'空'}</td>
-    			<td>${(inv.type)!'空'}</td>
-    			<td>${(inv.remark)!'空'}</td>
-    			<td>${(inv.ctime)!'空'}</td>
-    			<td>${(inv.rname)!'空'}</td>
-    		</tr>
-    	</#list>
-    </table>
+  <div id="main">
+  	<div>
+	    <h1>入库列表</h1>
+	    <p><a href="${contextPath}/nev/main">返回</a></p>
+	    ${(msg.msgContent)!''}
+    </div>
+    <div id="middle">
+	    <form action="${contextPath}/inv/addInv" method="post">
+	    	<fieldset>
+	    		<legend>新增入库</legend>
+	    		商品：
+	    		<select name="inventory.goodsid">
+		    		<#list goodsList as goods>
+						<option value="${(goods.id)!''}">${(goods.goodsname)!''}</option>
+					</#list>
+	    		</select>
+	    		数量：<input type="text" name="inventory.goodsnum"/><span style="color:red;">${numMsg!''}</span>
+	    		<input type="hidden" name="inventory.inType" value="buy"/>
+	    		日期：<input type="text" name="inventory.createtime"/>
+	    		备注：<input type="text" name="inventory.remark"/>
+	    		<input type="submit" name="ok" value="添加"/><!-- <span style="color:red;">${repeatMsg!''}</span> -->
+	    	</fieldset>
+	    </form>
+    </div>
+    <div id="bottom">
+	    <table>
+	    	<tr id="tt">
+	    		<td>编号</td>
+	    		<td>商品名称</td>
+	    		<td>库存数量</td>
+	    		<td>规格型号</td>
+	    		<td>入库类型</td>
+	    		<td>备注</td>
+	    		<td>创建时间</td>
+	    		<td>创建人</td>
+	    	</tr>
+	    	<!-- 切记！！！freemarker需要安全输出，要使用（）！‘’形式判断字段是否为空，否则显示不出来 -->
+	    	<#list invList as inv>
+	    	<#if (inv_index % 2) == 0>
+	    		<tr style="background-color:#eee">
+	    			<td>${(inv.id)!'空'}</td>
+	    			<td>${(inv.gname)!'空'}</td>
+	    			<td>${(inv.gnum)!'空'}</td>
+	    			<td>${(inv.spec)!'空'}</td>
+	    			<td>${(inv.type)!'空'}</td>
+	    			<td>${(inv.remark)!'空'}</td>
+	    			<td>${(inv.ctime)!'空'}</td>
+	    			<td>${(inv.rname)!'空'}</td>
+	    		</tr>
+	    	<#else>
+	    		<tr>
+	    			<td>${(inv.id)!'空'}</td>
+	    			<td>${(inv.gname)!'空'}</td>
+	    			<td>${(inv.gnum)!'空'}</td>
+	    			<td>${(inv.spec)!'空'}</td>
+	    			<td>${(inv.type)!'空'}</td>
+	    			<td>${(inv.remark)!'空'}</td>
+	    			<td>${(inv.ctime)!'空'}</td>
+	    			<td>${(inv.rname)!'空'}</td>
+	    		</tr>
+	    	</#if>
+	    	</#list>
+	    </table>
+    </div>
+  </div>
   </body>
 </html>

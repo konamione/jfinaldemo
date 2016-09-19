@@ -25,7 +25,7 @@ public class SellBiz {
 					s.getLong("goodsid"));
 			if (stoList == null || stoList.size() == 0) {
 				msg.setMsgFlag(false);
-				msg.setMsgContent("销售的商品不存在！请查证后再操作!");
+				msg.setMsgContent("销售的商品没有库存！请查证后再操作!");
 			} else {
 				Storage sto = stoList.get(0);
 				if (s.getStr("outType").equals("sell")) {
@@ -34,7 +34,9 @@ public class SellBiz {
 						msg.setMsgFlag(false);
 						msg.setMsgContent("商品库存不足！无法进行本次销售!");
 					} else {
-						s.set("createTime", new Date());
+						if (s.getDate("createTime") == null) {
+							s.set("createTime", new Date());
+						}
 						boolean b = s.save();
 						sto.set("num",
 								sto.getLong("num") - s.getLong("goodsnum"));

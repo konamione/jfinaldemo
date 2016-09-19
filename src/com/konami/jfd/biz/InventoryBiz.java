@@ -24,7 +24,9 @@ public class InventoryBiz {
 	public MessageDto addInv(Inventory inv){
 		try {
 			MessageDto msg = new MessageDto();
-			inv.set("createtime", new Date());
+			if (inv.getDate("createtime") == null) {
+				inv.set("createtime", new Date());
+			}
 			boolean b = inv.save();
 			boolean b1 = false;
 			Storage s = null;

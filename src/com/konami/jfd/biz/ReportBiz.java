@@ -63,12 +63,12 @@ public class ReportBiz {
 		// return
 		// Sell.dao.find("select s.id as id, g.goodsname as gname, g.goodsspec as gspec, g.CostPrice as cprice, g.retailPrice as rprice, s.goodsnum as goodsnum, s.goodsPrice as goodsPrice, s.finalPrice as finalPrice, case s.outType when 'sell' then '销售' when 'back' then '退货' end as outType, s.remark as remark, s.createtime as createTime, u.realname as rname from t_sell s left join t_goods g on s.goodsid = g.id left join t_user u on s.createid = u.id where outType in (?,?)","sell","back");
 		return Sell.dao
-				.find("select s.id as id, g.goodsname as gname, g.goodsspec as gspec, g.CostPrice as cprice, g.retailPrice as rprice, s.goodsnum as goodsnum, s.goodsPrice as goodsPrice, s.finalPrice as finalPrice, case s.outType when 'sell' then '销售' when 'back' then '退货' when 'pro' then '铺货' when 'proback' then '铺货退货' end as outType, s.remark as remark, s.createtime as createTime, u.realname as rname from t_sell s left join t_goods g on s.goodsid = g.id left join t_user u on s.createid = u.id");
+				.find("select s.id as id, g.goodsname as gname, g.goodsspec as gspec, g.CostPrice as cprice, g.retailPrice as rprice, s.goodsnum as goodsnum, s.goodsPrice as goodsPrice, s.finalPrice as finalPrice, case s.outType when 'sell' then '销售' when 'back' then '退货' when 'pro' then '铺货' when 'proback' then '铺货退货' end as outType, s.custname as custname, s.remark as remark, s.createtime as createTime, u.realname as rname from t_sell s left join t_goods g on s.goodsid = g.id left join t_user u on s.createid = u.id");
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<Sell> loadSellByPara(Sell s, Date ft, Date tt) {
-		String sql = "select s.id as id, g.goodsname as gname, g.goodsspec as gspec, g.CostPrice as cprice, g.retailPrice as rprice, s.goodsnum as goodsnum, s.goodsPrice as goodsPrice, s.finalPrice as finalPrice, case s.outType when 'sell' then '销售' when 'back' then '退货' when 'pro' then '铺货' when 'proback' then '铺货退货' end as outType, s.remark as remark, s.createtime as createTime, u.realname as rname from t_sell s left join t_goods g on s.goodsid = g.id left join t_user u on s.createid = u.id where 1=1";
+		String sql = "select s.id as id, g.goodsname as gname, g.goodsspec as gspec, g.CostPrice as cprice, g.retailPrice as rprice, s.goodsnum as goodsnum, s.goodsPrice as goodsPrice, s.finalPrice as finalPrice, case s.outType when 'sell' then '销售' when 'back' then '退货' when 'pro' then '铺货' when 'proback' then '铺货退货' end as outType, s.custname as custname, s.remark as remark, s.createtime as createTime, u.realname as rname from t_sell s left join t_goods g on s.goodsid = g.id left join t_user u on s.createid = u.id where 1=1";
 		List paras = new ArrayList();
 		if (s.getLong("goodsid") != 0) {
 			sql += " and s.goodsid = ?";

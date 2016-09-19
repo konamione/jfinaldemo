@@ -1,6 +1,7 @@
 package com.konami.jfd.controller;
 
 import com.jfinal.core.Controller;
+import com.konami.jfd.vo.User;
 
 public class NevController extends Controller{
 	public void index(){
@@ -18,6 +19,7 @@ public class NevController extends Controller{
 		} else if(para.equals("exit")){
 			exitSys();
 		} else if(para.equals("main")){
+			setAttr("currentUser", (User)getSession().getAttribute("currentUser"));
 			renderFreeMarker("menus.html");
 		} else if(para.equals("goods")){
 			forwardAction("/goods");

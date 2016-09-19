@@ -12,7 +12,9 @@ public class CashBiz {
 	}
 	
 	public MessageDto addCash(Cash c){
-		c.set("createtime", new Date());
+		if (c.getDate("createtime") == null) {
+			c.set("createtime", new Date());
+		}
 		MessageDto msg = new MessageDto();
 		boolean b = c.save();
 		if(b){

@@ -1,62 +1,140 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <title>index.html</title>
-	
-    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-    <meta http-equiv="description" content="this is my page">
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    
-    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<head>
+<title>index.html</title>
 
-  </head>
-  
-  <body>
-    <h1>商品列表</h1>
-    ${(msg.msgContent)!''}
-    <p><a href="${contextPath}/nev/main">返回</a></p>
-    <form action="${contextPath}/goods/addgoods" method="post">
-    	<fieldset>
-    		<legend>添加商品</legend>
-    		商品名称：<input type="text" name="goods.goodsname" value="${(goods.goodsname)!''}"/><span style="color:red;">${nameMsg!''}</span>
-		   	规格型号：<input type="text" name="goods.goodsspec" value="斤" disabled="disabled"/>
-		   	成本价：<input type="text" name="goods.CostPrice" value="${(goods.CostPrice)!''}"/><span style="color:red;">${costMsg!''}</span>
-		   	零售价：<input type="text" name="goods.retailPrice" value="${(goods.retailPrice)!''}"/><span style="color:red;">${retailMsg!''}</span>
-		   	<input type="submit" name="ok" value="添加" onclick/>
-    	</fieldset>
-    </form>
-    <table>
-    	<tr>
-    		<td>编号</td>
-    		<td>商品名称</td>
-    		<td>规格型号</td>
-    		<td>成本价</td>
-    		<td>零售价</td>
-    		<td>创建时间</td>
-    		<td>创建人</td>
-    		<td>修改时间</td>
-    		<td>修改人</td>
-    		<td>操作</td>
-    	</tr>
-    	<!-- 切记！！！freemarker需要安全输出，要使用（）！‘’形式判断字段是否为空，否则显示不出来 -->
-    	<#list goodsList as goods>
-    		<tr>
-    			<td>${(goods.id)!'空'}</td>
-    			<td>${(goods.name)!'空'}</td>
-    			<td>${(goods.spec)!'空'}</td>
-    			<td>${(goods.cost)!'空'}</td>
-    			<td>${(goods.retail)!'空'}</td>
-    			<td>${(goods.ctime)!'空'}</td>
-    			<td>${(goods.rname)!'空'}</td>
-    			<td>${(goods.mtime)!'空'}</td>
-    			<#if (goods.mtime)??>
-	    			<td>${(goods.rname)!'空'}</td>
-	    		<#else>
-	    			<td>空</td>
-    			</#if>
-    			<td><a href="${contextPath}/goods/modifyGoods/${goods.id}">修改</a></td>
-    		</tr>
-    	</#list>
-    </table>
-  </body>
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<style type="text/css">
+	body{
+			font-family:"微软雅黑";
+		}
+	#main{
+		text-align:center;
+	}
+	#middle{
+		width:1000px;
+		position:relative;
+		left:180px;
+	}
+	#bottom{
+		width:1000px;
+		position:relative;
+		left:180px;
+	}
+	table{
+		text-align:center;
+	}
+	#tt{
+		background-color:#7EC0EE;
+		font-weight:bold;
+	}
+	a:link{
+		font-family:"微软雅黑";
+		font-weight:bold;
+		color:#7EC0EE;
+		text-decoration:none;
+	}
+	a:visited{
+		font-family:"微软雅黑";
+		font-weight:bold;
+		color:#7EC0EE;
+		text-decoration:none;
+	}
+	a:hover{
+		font-family:"微软雅黑";
+		font-weight:bold;
+		color:#EE9A00;
+		text-decoration:underline;
+	}
+	a:active{
+		font-family:"微软雅黑";
+		font-weight:bold;
+		color:#EE9A00;
+		text-decoration:underline;
+		background-color:#eee;
+	}
+</style>
+</head>
+
+<body>
+	<div id="main">
+		<div>
+			<h1>商品列表</h1>
+			${(msg.msgContent)!''}
+			<p>
+				<a href="${contextPath}/nev/main">返回</a>
+			</p>
+		</div>
+		<div id="middle">
+			<form action="${contextPath}/goods/addgoods" method="post">
+				<fieldset>
+					<legend>添加商品</legend>
+					商品名称：<input type="text" name="goods.goodsname"
+						value="${(goods.goodsname)!''}" /><span style="color:red;">${nameMsg!''}</span>
+					规格型号：<input type="text" name="goods.goodsspec" value="斤"
+						disabled="disabled" /> 成本价：<input type="text"
+						name="goods.CostPrice" value="${(goods.CostPrice)!''}" /><span
+						style="color:red;">${costMsg!''}</span> 零售价：<input type="text"
+						name="goods.retailPrice" value="${(goods.retailPrice)!''}" /><span
+						style="color:red;">${retailMsg!''}</span> <input type="submit"
+						name="ok" value="添加" onclick />
+				</fieldset>
+			</form>
+		</div>
+		<div id="bottom">
+			<table>
+				<tr id="tt">
+					<td>编号</td>
+					<td>商品名称</td>
+					<td>规格型号</td>
+					<td>成本价</td>
+					<td>零售价</td>
+					<td>创建时间</td>
+					<td>创建人</td>
+					<td>修改时间</td>
+					<td>修改人</td>
+					<td>操作</td>
+				</tr>
+				<!-- 切记！！！freemarker需要安全输出，要使用（）！‘’形式判断字段是否为空，否则显示不出来 -->
+				<#list goodsList as goods>
+				<#if (goods_index % 2) == 0>
+				<tr style="background-color:#eee">
+					<td>${(goods.id)!'空'}</td>
+					<td>${(goods.name)!'空'}</td>
+					<td>${(goods.spec)!'空'}</td>
+					<td>${(goods.cost)!'空'}</td>
+					<td>${(goods.retail)!'空'}</td>
+					<td>${(goods.ctime)!'空'}</td>
+					<td>${(goods.rname)!'空'}</td>
+					<td>${(goods.mtime)!'空'}</td> <#if (goods.mtime)??>
+					<td>${(goods.rname)!'空'}</td> <#else>
+					<td>空</td> </#if>
+					<td><a href="${contextPath}/goods/modifyGoods/${goods.id}">修改</a>
+					</td>
+				</tr>
+				<#else>
+				<tr>
+					<td>${(goods.id)!'空'}</td>
+					<td>${(goods.name)!'空'}</td>
+					<td>${(goods.spec)!'空'}</td>
+					<td>${(goods.cost)!'空'}</td>
+					<td>${(goods.retail)!'空'}</td>
+					<td>${(goods.ctime)!'空'}</td>
+					<td>${(goods.rname)!'空'}</td>
+					<td>${(goods.mtime)!'空'}</td> <#if (goods.mtime)??>
+					<td>${(goods.rname)!'空'}</td> <#else>
+					<td>空</td> </#if>
+					<td><a href="${contextPath}/goods/modifyGoods/${goods.id}">修改</a>
+					</td>
+				</tr>
+				</#if>
+				</#list>
+			</table>
+		</div>
+	</div>
+</body>
 </html>
