@@ -64,7 +64,7 @@
 				</p>
 				<p>
 					商品名称：<input type="text" name="goods.goodsname"
-						value="${goods.goodsname}" />
+						value="${(goods.goodsname)!''}" />
 				</p>
 				<p>
 					规格型号：<input type="text" name="goods.goodsspec" value="斤"
@@ -72,11 +72,11 @@
 				</p>
 				<p>
 					成本价：<input type="text" name="goods.CostPrice"
-						value="${goods.CostPrice}" />
+						value="${(goods.CostPrice)!''}" />
 				</p>
 				<p>
 					零售价：<input type="text" name="goods.retailPrice"
-						value="${goods.retailPrice}" />
+						value="${(goods.retailPrice)!''}" />
 				</p>
 				<p>
 					<a href="${contextPath}/goods">返回</a><input type="submit" name="ok" value="修改" />
