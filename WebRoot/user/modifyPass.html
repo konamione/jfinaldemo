@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>modifyPass.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<style type="text/css">
+	body{
+			font-family:"微软雅黑";
+		}
+	#main{
+		width:300px;
+		height:400px;
+		text-align:center;
+		border-style:solid;
+		border-width:2px;
+		border-color:#ccc;
+		position:absolute;
+		left:550px;
+		top:120px;
+	}
+	a:link{
+		font-family:"微软雅黑";
+		font-weight:bold;
+		color:#7EC0EE;
+		text-decoration:none;
+	}
+	a:visited{
+		font-family:"微软雅黑";
+		font-weight:bold;
+		color:#7EC0EE;
+		text-decoration:none;
+	}
+	a:hover{
+		font-family:"微软雅黑";
+		font-weight:bold;
+		color:#EE9A00;
+		text-decoration:underline;
+	}
+	a:active{
+		font-family:"微软雅黑";
+		font-weight:bold;
+		color:#EE9A00;
+		text-decoration:underline;
+		background-color:#eee;
+	}
+</style>
+  </head>
+  
+  <body>
+    <div id="main">
+    	<div>
+    		<h1>修改密码</h1>
+    		<a href="${contextPath}/nev/main">返回</a>
+    	</div>
+    	<div>
+    		<form action="${contextPath}/user/doModifyPass" method="post">
+    			<fieldset>
+    				<legend>密码</legend>
+    				<p>旧密码：<input type="password" name="oldPass"/><br/><span style="color:red;">${oldMsg!''}</span></p>
+    				<p>新密码：<input type="password" name="newPass"/><br/><span style="color:red;">${newMsg!''}</span></p>
+    				<p>重复新密码：<input type="password" name="reNewPass"/><br/><span style="color:red;">${reNewMsg!''}</span></p>
+    				<p><input type="submit" name="ok" value="修改"/></p>
+    			</fieldset>
+    		</form>
+    	</div>
+    </div>
+  </body>
+</html>

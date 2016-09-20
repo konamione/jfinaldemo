@@ -6,6 +6,7 @@ import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.konami.jfd.biz.UserBiz;
 import com.konami.jfd.interceptor.LoginValidator;
+import com.konami.jfd.interceptor.PassValidator;
 import com.konami.jfd.vo.MessageDto;
 import com.konami.jfd.vo.User;
 
@@ -70,6 +71,26 @@ public class UserController extends Controller {
 			String fMsg = "用户名或密码错误!";
 			setAttr("fMsg",fMsg);
 			renderFreeMarker("login.html");
+		}
+	}
+	
+	public void toModifyPass(){
+		renderFreeMarker("modifyPass.html");
+	}
+	
+	@Before(PassValidator.class)
+	public void doModifyPass(){
+		String oldPass = getPara("oldPass");
+		String newPass = getPara("newPass");
+		String reNewPass = getPara("reNewPass");
+		User u = (User)getSession().getAttribute("currentUser");
+		if (u.getStr("userpass").equals(oldPass)) {
+			MessageDto msg = ub.modifyPass(newPass, u);
+			setAttr("msg", msg);
+			forwardAction("/nev/main");
+		} else {
+			setAttr("oldMsg", "旧密码输入错误");
+			renderFreeMarker("modifyPass.html");
 		}
 	}
 }

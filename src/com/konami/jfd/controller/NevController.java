@@ -25,6 +25,8 @@ public class NevController extends Controller{
 			forwardAction("/goods");
 		} else if(para.equals("pro")){
 			forwardAction("/pro");
+		} else if(para.equals("modifyPass")){
+			forwardAction("/user/toModifyPass");
 		}
 	}
 	

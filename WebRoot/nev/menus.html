@@ -59,6 +59,8 @@
 		    <p>
 		    	<#if (currentUser.id) == 1>
 		    	<a href="${contextPath}/nev/user">用户管理</a>
+		    	<#else>
+		    	<a href="${contextPath}/nev/modifyPass">修改密码</a>
 		    	</#if>
 		    	<a href="${contextPath}/nev/goods">商品管理</a>
 		    	<a href="${contextPath}/nev/inventory">入库管理</a>

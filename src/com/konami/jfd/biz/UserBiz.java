@@ -65,4 +65,17 @@ public class UserBiz {
 		}
 		return currentUser;
 	}
+	
+	public MessageDto modifyPass(String newPass, User u){
+		MessageDto msg = new MessageDto();
+		u.set("userpass", newPass);
+		boolean b = u.update();
+		msg.setMsgFlag(b);
+		if (b) {
+			msg.setMsgContent("修改成功");
+		} else {
+			msg.setMsgContent("修改失败");
+		}
+		return msg;
+	}
 }
