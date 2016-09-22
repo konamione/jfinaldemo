@@ -29,8 +29,8 @@ public class ProBiz {
 			} else {
 				Storage sto = stoList.get(0);
 				if (s.getStr("outType").equals("pro")) {
-					if (sto.getLong("num") <= 0
-							|| sto.getLong("num") < s.getLong("goodsnum")) {
+					if (sto.getDouble("num") <= 0
+							|| sto.getDouble("num") < s.getDouble("goodsnum")) {
 						msg.setMsgFlag(false);
 						msg.setMsgContent("商品库存不足！无法进行本次销售!");
 					} else {
@@ -39,7 +39,7 @@ public class ProBiz {
 						}
 						boolean b = s.save();
 						sto.set("num",
-								sto.getLong("num") - s.getLong("goodsnum"));
+								sto.getDouble("num") - s.getDouble("goodsnum"));
 						boolean b1 = sto.update();
 						if (b && b1) {
 							msg.setMsgFlag(true);
@@ -54,13 +54,13 @@ public class ProBiz {
 					boolean b = s.save();
 					Inventory inv = new Inventory();
 					inv.set("goodsid", s.getLong("goodsid"));
-					inv.set("goodsnum", Math.abs(s.getLong("goodsnum")));
+					inv.set("goodsnum", Math.abs(s.getDouble("goodsnum")));
 					inv.set("inType", "proback");
 					inv.set("remark", s.getStr("remark"));
 					inv.set("createid", s.getLong("createid"));
 					inv.set("createtime", new Date());
 					boolean b2 = inv.save();
-					sto.set("num", sto.getLong("num") + Math.abs(s.getLong("goodsnum")));
+					sto.set("num", sto.getDouble("num") + Math.abs(s.getDouble("goodsnum")));
 					boolean b1 = sto.update();
 					if (b && b1 && b2) {
 						msg.setMsgFlag(true);

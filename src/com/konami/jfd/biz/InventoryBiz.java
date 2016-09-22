@@ -34,12 +34,12 @@ public class InventoryBiz {
 			if (sList == null || sList.size() == 0) {
 				s = new Storage();
 				s.set("goodsid", inv.getLong("goodsid"));
-				s.set("num", inv.getLong("goodsnum"));
+				s.set("num", inv.getDouble("goodsnum"));
 				s.set("createtime", new Date());
 				b1 = s.save();
 			} else {
 				s = sList.get(0);
-				s.set("num", s.getLong("num") + inv.getLong("goodsnum"));
+				s.set("num", s.getDouble("num") + inv.getDouble("goodsnum"));
 				s.set("createtime", new Date());
 				b1 = s.update();
 			}

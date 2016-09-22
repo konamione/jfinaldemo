@@ -15,11 +15,12 @@
 		if (num == null || num == undefined || num == "" || price == null
 				|| price == undefined || price == "") {
 			//alert("商品数量或单价不能为空！");
+			alert("zoule");
 			document.getElementById('priceMsg').innerText = "商品数量或单价不能为空！";
 		} else {
 			document.getElementById('priceMsg').innerText = "";
-			var fp = parseInt(num) * parseFloat(price);
-			document.getElementById('finalPrice').value = fp;
+			var fp = parseFloat(num) * parseFloat(price);
+			document.getElementById('finalPrice').value = fp.toFixed(2);
 		}
 	}
 	function validator() {
@@ -103,7 +104,7 @@
 					商品： <select name="sell.goodsid" id="gid">
 						<option value="none" name="op">--请选择--</option> <#list goodsList
 						as goods>
-						<option name="op" value="${(goods.id)!''}">${(goods.goodsname)!''}-${(goods.CostPrice)!''}-${(goods.retailPrice)}</option>
+						<option name="op" value="${(goods.id)!''}">${(goods.goodsname)!''}-${(goods.CostPrice)!''}-${(goods.retailPrice)!''}</option>
 						</#list>
 					</select><span style="color:red;" id="goodsMsg"></span> 数量：<input
 						type="text" name="sell.goodsnum" id="num" /> 单价：<input type="text"
