@@ -67,6 +67,12 @@ a:active {
 	background-color: #eee;
 }
 </style>
+<script type="text/javascript" src="../js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/jquery/easyloader.js"></script>
+<script type="text/javascript" src="../js/jquery/locale/easyui-lang-zh_CN.js"></script>
+<link rel="stylesheet" href="../js/jquery/themes/icon.css" type="text/css"></link>
+<link rel="stylesheet" href="../js/jquery/themes/bootstrap/easyui.css" type="text/css"></link>
   </head>
   
   <body>
@@ -95,7 +101,7 @@ a:active {
 				<option value="proback">铺货退货</option>
     		</select>
     		备注：<input type="text" name="sell.remark"/>
-    		从：<input type="text" name="createtimefrom"/>至<input type="text" name="createtimeto"/><br/>
+    		从：<input type="text" name="createtimefrom" class="easyui-datetimebox" data-options="showSeconds:true"/>至<input type="text" name="createtimeto" class="easyui-datetimebox" data-options="showSeconds:true"/><br/>
    			出库人：
    			<select name="sell.createid">
     			<option value="0">--全部--</option>

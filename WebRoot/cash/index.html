@@ -8,6 +8,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
 <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
 <style type="text/css">
 body {
 	font-family: "微软雅黑";
@@ -67,6 +68,12 @@ a:active {
 	background-color: #eee;
 }
 </style>
+<script type="text/javascript" src="../js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/jquery/easyloader.js"></script>
+<script type="text/javascript" src="../js/jquery/locale/easyui-lang-zh_CN.js"></script>
+<link rel="stylesheet" href="../js/jquery/themes/icon.css" type="text/css"></link>
+<link rel="stylesheet" href="../js/jquery/themes/bootstrap/easyui.css" type="text/css"></link>
 </head>
 
 <body>
@@ -86,7 +93,7 @@ a:active {
 						style="color:red;">${resMsg!''}</span> 金额：<input type="text"
 						name="cash.money" value="${(cash.money)!''}" /><span
 						style="color:red;">${moneyMsg!''}</span> 日期：<input type="text"
-						name="cash.createtime" /> 备注：<input type="text" name="cash.remark"
+						name="cash.createtime" class="easyui-datetimebox" data-options="showSeconds:true"/> 备注：<input type="text" name="cash.remark"
 						value="${(cash.remark)!''}" /> <input type="submit" name="ok"
 						value="添加" />
 					<!-- <span style="color:red;">${repeatMsg!''}</span> -->

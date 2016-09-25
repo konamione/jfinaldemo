@@ -95,6 +95,12 @@ a:active {
 	background-color: #eee;
 }
 </style>
+<script type="text/javascript" src="../js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/jquery/easyloader.js"></script>
+<script type="text/javascript" src="../js/jquery/locale/easyui-lang-zh_CN.js"></script>
+<link rel="stylesheet" href="../js/jquery/themes/icon.css" type="text/css"></link>
+<link rel="stylesheet" href="../js/jquery/themes/bootstrap/easyui.css" type="text/css"></link>
 </head>
 
 <body>
@@ -124,7 +130,7 @@ a:active {
 						<option value="pro">铺货</option>
 						<option value="proback">退货</option>
 					</select> <br/>客户姓名：<input type="text" name="sell.custname" /> 日期：<input
-						type="text" name="sell.createTime" /> 备注：<input type="text"
+						type="text" name="sell.createTime" class="easyui-datetimebox" data-options="showSeconds:true"/> 备注：<input type="text"
 						name="sell.remark" /> <input type="submit" name="ok" value="添加"
 						onclick="return validator()" />
 				</fieldset>

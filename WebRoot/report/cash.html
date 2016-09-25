@@ -67,6 +67,12 @@ a:active {
 	background-color: #eee;
 }
 </style>
+<script type="text/javascript" src="../js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/jquery/easyloader.js"></script>
+<script type="text/javascript" src="../js/jquery/locale/easyui-lang-zh_CN.js"></script>
+<link rel="stylesheet" href="../js/jquery/themes/icon.css" type="text/css"></link>
+<link rel="stylesheet" href="../js/jquery/themes/bootstrap/easyui.css" type="text/css"></link>
   </head>
   
   <body>
@@ -81,7 +87,7 @@ a:active {
     		<legend>查询条件</legend>
     		支出事由：<input type="text" name="cash.res"/>
     		备注：<input type="text" name="cash.remark"/>
-    		从：<input type="text" name="createtimefrom"/>至<input type="text" name="createtimeto"/>
+    		从：<input type="text" name="createtimefrom" class="easyui-datetimebox" data-options="showSeconds:true"/>至<input type="text" name="createtimeto" class="easyui-datetimebox" data-options="showSeconds:true"/>
    			记录人：
    			<select name="cash.createid">
     			<option value="0">--全部--</option>
