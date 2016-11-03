@@ -95,6 +95,24 @@ a:active {
 	background-color: #eee;
 }
 </style>
+<script type="text/javascript">
+		function loadspec(){
+			var spec = "${(sell.goodsid)!''}";
+			var specs = document.getElementById('gid');
+			for ( var i = 1; i < specs.childNodes.length; i++) {
+				if(specs.childNodes[i].value == spec){
+					specs.childNodes[i].setAttribute("selected","selected");
+				}
+			}
+			var spec1 = "${(sell.outType)!''}";
+			var specs = document.getElementById('spec');
+			for ( var i = 1; i < specs.childNodes.length; i++) {
+				if(specs.childNodes[i].value == spec1){
+					specs.childNodes[i].setAttribute("selected","selected");
+				}
+			}
+		}
+	</script>
 <script type="text/javascript" src="../js/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="../js/jquery/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/jquery/easyloader.js"></script>
@@ -103,10 +121,10 @@ a:active {
 <link rel="stylesheet" href="../js/jquery/themes/bootstrap/easyui.css" type="text/css"></link>
 </head>
 
-<body>
+<body onload="loadspec()">
 	<div id="main">
 		<div>
-			<h1>铺货列表</h1>
+			<h1>铺货(出库)列表</h1>
 			<p>
 				<a href="${contextPath}/nev/main">返回</a>
 			</p>
@@ -121,15 +139,16 @@ a:active {
 						as goods>
 						<option name="op" value="${(goods.id)!''}">${(goods.goodsname)!''}-${(goods.CostPrice)!''}-${(goods.retailPrice)!''}</option>
 						</#list>
-					</select><span style="color:red;" id="goodsMsg"></span> 数量：<input
-						type="text" name="sell.goodsnum" id="num" /> 单价：<input type="text"
+					</select><span style="color:red;" id="goodsMsg"></span><br/>
+					 数量：<input
+						type="text" name="sell.goodsnum" id="num" /><span style="color:red;">${gNumError!''}</span> 单价：<input type="text"
 						name="sell.goodsPrice" onblur="caleFinalPrice()" id="price" /><span
-						style="color:red;" id="priceMsg"></span> 应收金额：<input type="text"
-						name="sell.finalPrice" readonly="readonly" id="finalPrice" />
-					销售类型： <select name="sell.outType">
+						style="color:red;" id="priceMsg"></span><span style="color:red;">${gPriceError!''}</span> 应收金额：<input type="text"
+						name="sell.finalPrice" readonly="readonly" id="finalPrice" /><br/>
+					销售类型： <select name="sell.outType" id="spec">
 						<option value="pro">铺货</option>
 						<option value="proback">退货</option>
-					</select> <br/>客户姓名：<input type="text" name="sell.custname" /> 日期：<input
+					</select> 客户姓名：<input type="text" name="sell.custname" /><span style="color:red;">${cNameError!''}</span> <br/>日期：<input
 						type="text" name="sell.createTime" class="easyui-datetimebox" data-options="showSeconds:true"/> 备注：<input type="text"
 						name="sell.remark" /> <input type="submit" name="ok" value="添加"
 						onclick="return validator()" />

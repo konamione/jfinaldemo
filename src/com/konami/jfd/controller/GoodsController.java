@@ -25,7 +25,16 @@ public class GoodsController extends Controller {
 	public void addgoods(){
 		Goods g = getModel(Goods.class);
 		g.set("createid", ((User)getSession().getAttribute("currentUser")).get("id"));
-		g.set("goodsspec", "斤");
+		String spec = g.getStr("goodsspec");
+		if(spec.equals("jin")){
+			g.set("goodsspec", "斤");
+		}else if(spec.equals("ge")){
+			g.set("goodsspec", "个");
+		}else if(spec.equals("xiang")){
+			g.set("goodsspec", "箱");
+		}else if(spec.equals("dai")){
+			g.set("goodsspec", "袋");
+		}
 		MessageDto msg = gb.addGoods(g);
 		setAttr("msg", msg);
 		forwardAction("/goods");

@@ -58,9 +58,20 @@
 		background-color:#eee;
 	}
 </style>
+<script type="text/javascript">
+	function loadspec(){
+		var spec = "${(goods.goodsspec)!''}";
+		var specs = document.getElementById('spec');
+		for ( var i = 1; i < specs.childNodes.length; i++) {
+			if(specs.childNodes[i].value == spec){
+				specs.childNodes[i].setAttribute("selected","selected");
+			}
+		}
+	}
+</script>
 </head>
 
-<body>
+<body onload="loadspec()">
 	<div id="main">
 		<div>
 			<h1>商品列表</h1>
@@ -73,15 +84,21 @@
 			<form action="${contextPath}/goods/addgoods" method="post">
 				<fieldset>
 					<legend>添加商品</legend>
-					商品名称：<input type="text" name="goods.goodsname"
+					商品名称：<input type="text" id="gName" name="goods.goodsname"
 						value="${(goods.goodsname)!''}" /><span style="color:red;">${nameMsg!''}</span>
-					规格型号：<input type="text" name="goods.goodsspec" value="斤"
-						disabled="disabled" /> 成本价：<input type="text"
+					规格型号：
+						<select name="goods.goodsspec" id="spec">
+							<option value="jin">斤
+							<option value="ge">个
+							<option value="xiang">箱
+							<option value="dai">袋
+						</select> <br/>
+						成本价：<input type="text"
 						name="goods.CostPrice" value="${(goods.CostPrice)!''}" /><span
 						style="color:red;">${costMsg!''}</span> 零售价：<input type="text"
 						name="goods.retailPrice" value="${(goods.retailPrice)!''}" /><span
 						style="color:red;">${retailMsg!''}</span> <input type="submit"
-						name="ok" value="添加" onclick />
+						name="ok" id="ok" value="添加" />
 				</fieldset>
 			</form>
 		</div>

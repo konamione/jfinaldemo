@@ -49,9 +49,20 @@
 		background-color:#eee;
 	}
 </style>
+<script type="text/javascript">
+	function loadspec(){
+		var spec = '${goods.goodsspec}';
+		var specs = document.getElementById('spec');
+		for ( var i = 1; i < specs.childNodes.length; i++) {
+			if(specs.childNodes[i].text == spec){
+				specs.childNodes[i].setAttribute("selected","selected");
+			}
+		}
+	}
+</script>
 </head>
 
-<body>
+<body onload="loadspec()">
 	<div id="main">
 		<div>
 			<h1>修改商品</h1>
@@ -67,8 +78,12 @@
 						value="${(goods.goodsname)!''}" />
 				</p>
 				<p>
-					规格型号：<input type="text" name="goods.goodsspec" value="斤"
-						disabled="disabled" />
+					规格型号：<select id="spec" name="goods.goodsspec">
+								<option value="jin">斤
+								<option value="ge">个
+								<option value="xiang">箱
+								<option value="dai">袋
+							</select>
 				</p>
 				<p>
 					成本价：<input type="text" name="goods.CostPrice"

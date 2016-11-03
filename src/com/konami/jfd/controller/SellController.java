@@ -6,6 +6,7 @@ import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.konami.jfd.biz.GoodsBiz;
 import com.konami.jfd.biz.SellBiz;
+import com.konami.jfd.interceptor.SellValidator;
 import com.konami.jfd.vo.Goods;
 import com.konami.jfd.vo.MessageDto;
 import com.konami.jfd.vo.Sell;
@@ -22,6 +23,7 @@ public class SellController extends Controller {
 		renderFreeMarker("/sell/index.html");
 	}
 	
+	@Before(SellValidator.class)
 	public void addSell(){
 		Sell s = getModel(Sell.class);
 		s.set("createid", ((User)getSession().getAttribute("currentUser")).get("id"));

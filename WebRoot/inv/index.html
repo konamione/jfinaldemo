@@ -58,6 +58,17 @@
 			background-color:#eee;
 		}
 	</style>
+	<script type="text/javascript">
+		function loadspec(){
+			var spec = "${(inventory.goodsid)!''}";
+			var specs = document.getElementById('spec');
+			for ( var i = 1; i < specs.childNodes.length; i++) {
+				if(specs.childNodes[i].value == spec){
+					specs.childNodes[i].setAttribute("selected","selected");
+				}
+			}
+		}
+	</script>
 	<script type="text/javascript" src="../js/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/jquery/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="../js/jquery/easyloader.js"></script>
@@ -66,7 +77,7 @@
 	<link rel="stylesheet" href="../js/jquery/themes/bootstrap/easyui.css" type="text/css"></link>
   </head>
   
-  <body>
+  <body onload="loadspec()">
   <div id="main">
   	<div>
 	    <h1>入库列表</h1>
@@ -78,9 +89,9 @@
 	    	<fieldset>
 	    		<legend>新增入库</legend>
 	    		商品：
-	    		<select name="inventory.goodsid">
+	    		<select id="spec" name="inventory.goodsid">
 		    		<#list goodsList as goods>
-						<option value="${(goods.id)!''}">${(goods.goodsname)!''}</option>
+						<option value="${(goods.id)!''}">${(goods.goodsname)!''}
 					</#list>
 	    		</select>
 	    		数量：<input type="text" name="inventory.goodsnum"/><span style="color:red;">${numMsg!''}</span>
