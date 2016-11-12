@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.Record;
 import com.konami.jfd.vo.Cash;
 import com.konami.jfd.vo.Inventory;
 import com.konami.jfd.vo.Sell;

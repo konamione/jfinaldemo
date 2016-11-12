@@ -84,7 +84,7 @@ public class UserController extends Controller {
 		String newPass = getPara("newPass");
 		String reNewPass = getPara("reNewPass");
 		User u = (User)getSession().getAttribute("currentUser");
-		if (u.getStr("userpass").equals(oldPass)) {
+		if (u.getStr("userpass").equals(oldPass) && reNewPass.equals(newPass)) {
 			MessageDto msg = ub.modifyPass(newPass, u);
 			setAttr("msg", msg);
 			forwardAction("/nev/main");

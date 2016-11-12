@@ -56,7 +56,7 @@ public class UserBiz {
 	
 	public User login(User u){
 		User currentUser = null;
-		MessageDto msg = new MessageDto();
+		//MessageDto msg = new MessageDto();
 		String sql = "";
 		sql += "select * from t_user where username = ? and userpass = ?";
 		List<User> uList = u.find(sql,u.getStr("username"),u.getStr("userpass"));

@@ -1,10 +1,7 @@
 package com.konami.jfd.interceptor;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
-import com.jfinal.render.RenderFactory;
 import com.konami.jfd.vo.User;
 
 public class GloablInterceptor implements Interceptor{
