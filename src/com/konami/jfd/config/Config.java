@@ -19,7 +19,14 @@ import com.konami.jfd.controller.ProController;
 import com.konami.jfd.controller.ReportController;
 import com.konami.jfd.controller.SellController;
 import com.konami.jfd.controller.UserController;
+import com.konami.jfd.interceptor.CashValidator;
 import com.konami.jfd.interceptor.GloablInterceptor;
+import com.konami.jfd.interceptor.GoodsValidator;
+import com.konami.jfd.interceptor.InventoryValidator;
+import com.konami.jfd.interceptor.LoginValidator;
+import com.konami.jfd.interceptor.PassValidator;
+import com.konami.jfd.interceptor.ProValidator;
+import com.konami.jfd.interceptor.SellValidator;
 import com.konami.jfd.vo.Cash;
 import com.konami.jfd.vo.Goods;
 import com.konami.jfd.vo.Inventory;
@@ -85,6 +92,13 @@ public class Config extends JFinalConfig{
 	public void configInterceptor(Interceptors me) {
 		me.add(new GloablInterceptor());
 		me.add(new Tx());
+//		me.add(new CashValidator());
+//		me.add(new GoodsValidator());
+//		me.add(new InventoryValidator());
+//		me.add(new LoginValidator());
+//		me.add(new PassValidator());
+//		me.add(new ProValidator());
+//		me.add(new SellValidator());
 	}
 
 	/**

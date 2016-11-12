@@ -22,7 +22,7 @@ public class SellBiz {
 			MessageDto msg = new MessageDto();
 			List<Storage> stoList = Storage.dao.find(
 					"select * from t_storage where goodsid = ?",
-					s.getLong("goodsid"));
+					Long.parseLong(s.getStr("goodsid")));
 			if (stoList == null || stoList.size() == 0) {
 				msg.setMsgFlag(false);
 				msg.setMsgContent("销售的商品没有库存！请查证后再操作!");
@@ -30,16 +30,16 @@ public class SellBiz {
 				Storage sto = stoList.get(0);
 				if (s.getStr("outType").equals("sell")) {
 					if (sto.getDouble("num") <= 0
-							|| sto.getDouble("num") < s.getDouble("goodsnum")) {
+							|| sto.getDouble("num") < Double.parseDouble(s.getStr("goodsnum"))) {
 						msg.setMsgFlag(false);
 						msg.setMsgContent("商品库存不足！无法进行本次销售!");
 					} else {
-						if (s.getDate("createTime") == null) {
-							s.set("createTime", new Date());
-						}
+//						if (s.getDate("createtime") == null) {
+//							s.set("createtime", new Date());
+//						}
 						boolean b = s.save();
 						sto.set("num",
-								sto.getDouble("num") - s.getDouble("goodsnum"));
+								sto.getDouble("num") - Double.parseDouble(s.getStr("goodsnum")));
 						boolean b1 = sto.update();
 						if (b && b1) {
 							msg.setMsgFlag(true);
@@ -50,17 +50,17 @@ public class SellBiz {
 						}
 					}
 				} else if (s.getStr("outType").equals("back")) {
-					s.set("createTime", new Date());
+					s.set("createtime", new Date());
 					boolean b = s.save();
 					Inventory inv = new Inventory();
-					inv.set("goodsid", s.getLong("goodsid"));
-					inv.set("goodsnum", Math.abs(s.getDouble("goodsnum")));
+					inv.set("goodsid", Long.parseLong(s.getStr("goodsid")));
+					inv.set("goodsnum", Math.abs(Double.parseDouble(s.getStr("goodsnum"))));
 					inv.set("inType", "back");
 					inv.set("remark", s.getStr("remark"));
-					inv.set("createid", s.getLong("createid"));
+					inv.set("createid", Long.parseLong(s.getStr("createid")));
 					inv.set("createtime", new Date());
 					boolean b2 = inv.save();
-					sto.set("num", sto.getDouble("num") + Math.abs(s.getDouble("goodsnum")));
+					sto.set("num", sto.getDouble("num") + Math.abs(Double.parseDouble(s.getStr("goodsnum"))));
 					boolean b1 = sto.update();
 					if (b && b1 && b2) {
 						msg.setMsgFlag(true);

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>index.html</title>
+<title>销售列表</title>
 
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="this is my page">
@@ -9,17 +9,31 @@
 
 <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
 <script type="text/javascript">
-	function caleFinalPrice() {
-		var num = document.getElementById('num').value;
-		var price = document.getElementById('price').value;
-		if (num == null || num == undefined || num == "" || price == null
-				|| price == undefined || price == "") {
-			//alert("商品数量或单价不能为空！");
-			document.getElementById('priceMsg').innerText = "商品数量或单价不能为空！";
-		} else {
-			document.getElementById('priceMsg').innerText = "";
-			var fp = parseFloat(num) * parseFloat(price);
-			document.getElementById('finalPrice').value = fp.toFixed(2);
+	function caleFinalPrice(i) {
+		if(i == 0){
+			var num = document.getElementById('num').value;
+			var price = document.getElementById('price').value;
+			if (num == null || num == undefined || num == "" || price == null
+					|| price == undefined || price == "") {
+				//alert("商品数量或单价不能为空！");
+				document.getElementById('priceMsg').innerText = "商品数量或单价不能为空！";
+			} else {
+				document.getElementById('priceMsg').innerText = "";
+				var fp = parseFloat(num) * parseFloat(price);
+				document.getElementById('finalPrice').value = fp.toFixed(2);
+			}
+		}else{
+			var num = document.getElementById('num' + i).value;
+			var price = document.getElementById('price' + i).value;
+			if (num == null || num == undefined || num == "" || price == null
+					|| price == undefined || price == "") {
+				//alert("商品数量或单价不能为空！");
+				document.getElementById('priceMsg' + i).innerText = "商品数量或单价不能为空！";
+			} else {
+				document.getElementById('priceMsg' + i).innerText = "";
+				var fp = parseFloat(num) * parseFloat(price);
+				document.getElementById('finalPrice' + i).value = fp.toFixed(2);
+			}
 		}
 	}
 	function validator() {
@@ -43,17 +57,20 @@
 			text-align:center;
 		}
 		#middle{
-			width:1000px;
+			width:1100px;
 			position:relative;
 			left:180px;
 		}
 		#bottom{
-			width:1000px;
+			width:1100px;
 			position:relative;
 			left:180px;
 		}
 		table{
 			text-align:center;
+		}
+		td{
+			width:120px;
 		}
 		#tt{
 			background-color:#7EC0EE;
@@ -84,6 +101,9 @@
 			text-decoration:underline;
 			background-color:#eee;
 		}
+		.td1{
+			width:1100px;
+		}
 	</style>
 	<script type="text/javascript">
 		function loadspec(){
@@ -103,12 +123,43 @@
 			}
 		}
 	</script>
-	<script type="text/javascript" src="../js/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/jquery/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="../js/jquery/easyloader.js"></script>
+	<script type="text/javascript" src="${contextPath}/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="${contextPath}/js/jquery/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="../js/jquery/locale/easyui-lang-zh_CN.js"></script>
-	<link rel="stylesheet" href="../js/jquery/themes/icon.css" type="text/css"></link>
-	<link rel="stylesheet" href="../js/jquery/themes/bootstrap/easyui.css" type="text/css"></link>
+	<link rel="stylesheet" href="${contextPath}/js/jquery/themes/icon.css" type="text/css"></link>
+	<link rel="stylesheet" href="${contextPath}/js/jquery/themes/bootstrap/easyui.css" type="text/css"></link>
+	<script type="text/javascript">
+	var rowCount = 0;
+	function addRow(){
+		rowCount++;
+		var table1 = document.getElementById('table1');
+		var tr1 = table1.insertRow(1);
+		tr1.id = "tr" + (rowCount + 1);
+		tr1.innerHTML = '<td class="td1">商品：<select name="sell.goodsid" id="gid"><option value="none" name="op">--请选择--<#list goodsList as goods>'
+			+ '<option name="op" value="${(goods.id)!''}">${(goods.goodsname)!''}-${(goods.CostPrice)!''}-${(goods.retailPrice)!''}'
+			+ '</#list></select><span style="color:red;" id="goodsMsg"></span>'
+			+ '数量：<input type="text" name="sell.goodsnum" id="num' + rowCount + '" size="3"/>'
+			+ '单价：<input type="text" name="sell.goodsPrice" onblur="caleFinalPrice(' + rowCount + ')" id="price' + rowCount + '"size="3"/>'
+			+ '<span style="color:red;" id="priceMsg' + rowCount + '"></span>'
+			+ '成交价格：<input type="text" name="sell.finalPrice" readonly="readonly" id="finalPrice' + rowCount + '"size="3"/>'
+			+ '销售类型： <select name="sell.outType" id="spec"><option value="sell">销售</option>'
+			+ '<option value="back">退货</option></select>'
+			+ '日期：<input type="text" name="sell.createtime" id="dp' + rowCount + '"/>'
+			+ '备注：<input type="text" name="sell.remark" /><input type="button" name="btnAdd" style="background-image:url(../image/add.png);background-repeat:no-repeat;cursor:pointer;" onclick="addRow()"/>'
+			+ '<input type="button" id="dl' + rowCount + '" name="btnAdd" style="background-image:url(../image/delete.png);background-repeat:no-repeat;cursor:pointer;" onclick="deleteRow(' + rowCount + ',event)"/>'
+			+ '</td>';
+		$('#dp' + rowCount).datetimebox({
+		    showSeconds: true
+		});
+	}
+	function deleteRow(rowCount, event){
+		var table1 = document.getElementById('table1');
+		//table1.deleteRow(rowCount);
+		var obj = event.srcElement ? event.srcElement : event.target;
+		var rowIndex = obj.parentElement.parentElement.rowIndex;
+		table1.deleteRow(rowIndex);
+	}
+	</script>
 </head>
 
 <body onload="loadspec()">
@@ -124,25 +175,29 @@
 			<form action="${contextPath}/sell/addSell" method="post">
 				<fieldset>
 					<legend>新增出库</legend>
-					商品： <select name="sell.goodsid" id="gid">
+					<table id="table1">
+		    		<tr id="tr1">
+		    		<td class="td1">
+					商品：<select name="sell.goodsid" id="gid">
 						<option value="none" name="op">--请选择-- <#list goodsList
 						as goods>
 						<option name="op" value="${(goods.id)!''}">${(goods.goodsname)!''}-${(goods.CostPrice)!''}-${(goods.retailPrice)!''}
 						</#list>
-					</select><span style="color:red;" id="goodsMsg"></span> <br/>
-					数量：<input
-						type="text" name="sell.goodsnum" id="num" /><span style="color:red;">${gNumError!''}</span> 单价：<input type="text"
-						name="sell.goodsPrice" onblur="caleFinalPrice()" id="price" /><span
-						style="color:red;" id="priceMsg"></span><span style="color:red;">${gPriceError!''}</span> 成交价格：<input type="text"
-						name="sell.finalPrice" readonly="readonly" id="finalPrice" /><span style="color:red;">${fPriceError!''}</span><br/>
-					销售类型： <select name="sell.outType" id="spec">
+					</select><span style="color:red;" id="goodsMsg"></span>数量：<input
+						type="text" name="sell.goodsnum" id="num" size="3"/>单价：<input type="text"
+						name="sell.goodsPrice" onblur="caleFinalPrice(0)" id="price" size="3"/><span
+						style="color:red;" id="priceMsg"></span>成交价格：<input type="text"
+						name="sell.finalPrice" readonly="readonly" id="finalPrice" size="3"/>销售类型： <select name="sell.outType" id="spec">
 						<option value="sell">销售</option>
 						<option value="back">退货</option>
-					</select>
-					日期：<input type="text" name="sell.createTime" class="easyui-datetimebox" data-options="showSeconds:true"/> 备注：<input
-						type="text" name="sell.remark" /> <input type="submit" name="ok"
-						value="添加" onclick="return validator()" />
+					</select>日期：<input type="text" name="sell.createtime" class="easyui-datetimebox" data-options="showSeconds:true"/>备注：<input
+						type="text" name="sell.remark" /><input type="button" name="btnAdd" style="background-image:url(../image/add.png);background-repeat:no-repeat;cursor:pointer;" onclick="addRow()"/><input type="button" id="dl' + rowCount + '" name="btnAdd" style="background-image:url(../image/delete.png);background-repeat:no-repeat;cursor:pointer;"/>
+					</td>
+		    		</tr>
+		    		</table>
+		    		<br/>
 				</fieldset>
+				<input type="submit" name="ok" value="添加" onclick="return validator()" />
 			</form>
 		</div>
 		<div id="bottom">

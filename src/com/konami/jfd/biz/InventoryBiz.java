@@ -24,22 +24,22 @@ public class InventoryBiz {
 	public MessageDto addInv(Inventory inv){
 		try {
 			MessageDto msg = new MessageDto();
-			if (inv.getDate("createtime") == null) {
-				inv.set("createtime", new Date());
-			}
+//			if (inv.getDate("createtime") == null) {
+//				inv.set("createtime", new Date());
+//			}
 			boolean b = inv.save();
 			boolean b1 = false;
 			Storage s = null;
-			List<Storage> sList = Storage.dao.find("select * from t_storage where goodsid = ?",inv.getLong("goodsid"));
+			List<Storage> sList = Storage.dao.find("select * from t_storage where goodsid = ?",Long.parseLong(inv.getStr("goodsid")));
 			if (sList == null || sList.size() == 0) {
 				s = new Storage();
-				s.set("goodsid", inv.getLong("goodsid"));
-				s.set("num", inv.getDouble("goodsnum"));
+				s.set("goodsid", Long.parseLong(inv.getStr("goodsid")));
+				s.set("num", Double.parseDouble(inv.getStr("goodsnum")));
 				s.set("createtime", new Date());
 				b1 = s.save();
 			} else {
 				s = sList.get(0);
-				s.set("num", s.getDouble("num") + inv.getDouble("goodsnum"));
+				s.set("num", s.getDouble("num") + Double.parseDouble(inv.getStr("goodsnum")));
 				s.set("createtime", new Date());
 				b1 = s.update();
 			}

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>index.html</title>
+    <title>入库列表</title>
 	
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="this is my page">
@@ -27,6 +27,9 @@
 		}
 		table{
 			text-align:center;
+		}
+		td{
+			width:121px;
 		}
 		#tt{
 			background-color:#7EC0EE;
@@ -57,6 +60,9 @@
 			text-decoration:underline;
 			background-color:#eee;
 		}
+		.td1{
+			width:990px;
+		}
 	</style>
 	<script type="text/javascript">
 		function loadspec(){
@@ -67,6 +73,30 @@
 					specs.childNodes[i].setAttribute("selected","selected");
 				}
 			}
+		}
+		var rowCount = 0;
+		function addRow(){
+			rowCount++;
+			var table1 = document.getElementById('table1');
+			var tr1 = table1.insertRow(1);
+			tr1.id = "tr" + (rowCount + 1);
+    		tr1.innerHTML = '<td class="td1">商品：<select id="spec" name="inventory.goodsid"><#list goodsList as goods>'
+    						+ '<option value="${(goods.id)!''}">${(goods.goodsname)!''}</#list></select>'
+    						+ '数量：<input type="text" name="inventory.goodsnum"/><span style="color:red;">${numMsg!''}</span>'
+    						+ '<input type="hidden" name="inventory.inType" value="buy"/>'
+    						+ '日期：<input type="text" id="dp' + rowCount + '" name="inventory.createtime"/>'
+    						+ '备注：<input type="text" name="inventory.remark"/>'
+    						+ '<input type="button" name="btnAdd" style="background-image:url(../image/add.png);background-repeat:no-repeat;cursor:pointer;" onclick="addRow()"/><input type="button" id="dl' + rowCount + '" name="btnAdd" style="background-image:url(../image/delete.png);background-repeat:no-repeat;cursor:pointer;" onclick="deleteRow(' + rowCount + ',event)"/></td>';
+    		$('#dp' + rowCount).datetimebox({
+    		    showSeconds: true
+    		});
+		}
+		function deleteRow(rowCount, event){
+			var table1 = document.getElementById('table1');
+			//table1.deleteRow(rowCount);
+			var obj = event.srcElement ? event.srcElement : event.target;
+			var rowIndex = obj.parentElement.parentElement.rowIndex;
+			table1.deleteRow(rowIndex);
 		}
 	</script>
 	<script type="text/javascript" src="../js/jquery/jquery.min.js"></script>
@@ -86,20 +116,22 @@
     </div>
     <div id="middle">
 	    <form action="${contextPath}/inv/addInv" method="post">
-	    	<fieldset>
+	    	<fieldset id="fs">
 	    		<legend>新增入库</legend>
-	    		商品：
-	    		<select id="spec" name="inventory.goodsid">
+	    		<table id="table1">
+	    		<tr id="tr1">
+	    		<td class="td1">
+	    		商品：<select id="spec" name="inventory.goodsid">
 		    		<#list goodsList as goods>
 						<option value="${(goods.id)!''}">${(goods.goodsname)!''}
 					</#list>
-	    		</select>
-	    		数量：<input type="text" name="inventory.goodsnum"/><span style="color:red;">${numMsg!''}</span>
-	    		<input type="hidden" name="inventory.inType" value="buy"/>
-	    		日期：<input type="text" name="inventory.createtime" class="easyui-datetimebox" data-options="showSeconds:true"/>
-	    		备注：<input type="text" name="inventory.remark"/>
-	    		<input type="submit" name="ok" value="添加"/><!-- <span style="color:red;">${repeatMsg!''}</span> -->
+	    		</select>数量：<input type="text" name="inventory.goodsnum" id="spec1"/><span style="color:red;" id="spec2">${numMsg!''}</span><input type="hidden" name="inventory.inType" value="buy" id="spec3"/>日期：<input type="text" name="inventory.createtime" class="easyui-datetimebox" data-options="showSeconds:true" id="spec4"/>备注：<input type="text" name="inventory.remark" id="spec5"/><input type="button" name="btnAdd" style="background-image:url(../image/add.png);background-repeat:no-repeat;cursor:pointer;" onclick="addRow()"/><input type="button" id="dl' + rowCount + '" name="btnAdd" style="background-image:url(../image/delete.png);background-repeat:no-repeat;cursor:pointer;"/>
+	    		</td>
+	    		</tr>
+	    		</table>
+	    		<br/>
 	    	</fieldset>
+	    	<input type="submit" name="ok" value="添加"/><!-- <span style="color:red;">${repeatMsg!''}</span> -->
 	    </form>
     </div>
     <div id="bottom">
