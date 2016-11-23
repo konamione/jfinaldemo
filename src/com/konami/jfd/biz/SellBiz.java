@@ -13,7 +13,7 @@ import com.konami.jfd.vo.Storage;
 
 public class SellBiz {
 	public List<Sell> loadAllSell() {
-		return Sell.dao.find("select s.id as id, g.goodsname as gname, g.goodsspec as gspec, g.CostPrice as cprice, g.retailPrice as rprice, s.goodsnum as goodsnum, s.goodsPrice as goodsPrice, s.finalPrice as finalPrice, case s.outType when 'sell' then '销售' when 'back' then '退货' end as outType, s.remark as remark, s.createtime as createTime, u.realname as rname from t_sell s left join t_goods g on s.goodsid = g.id left join t_user u on s.createid = u.id where outType in (?,?)","sell","back");
+		return Sell.dao.find("select s.id as id, g.goodsname as gname, g.goodsspec as gspec, g.CostPrice as cprice, g.retailPrice as rprice, s.goodsnum as goodsnum, s.goodsPrice as goodsPrice, s.finalPrice as finalPrice, case s.outType when 'sell' then '销售' when 'back' then '退货' end as outType, s.remark as remark, s.createtime as createtime, u.realname as rname from t_sell s left join t_goods g on s.goodsid = g.id left join t_user u on s.createid = u.id where outType in (?,?)","sell","back");
 	}
 
 	@Before(Tx.class)
@@ -57,7 +57,7 @@ public class SellBiz {
 					inv.set("goodsnum", Math.abs(Double.parseDouble(s.getStr("goodsnum"))));
 					inv.set("inType", "back");
 					inv.set("remark", s.getStr("remark"));
-					inv.set("createid", Long.parseLong(s.getStr("createid")));
+					inv.set("createid", s.getLong("createid"));
 					inv.set("createtime", new Date());
 					boolean b2 = inv.save();
 					sto.set("num", sto.getDouble("num") + Math.abs(Double.parseDouble(s.getStr("goodsnum"))));

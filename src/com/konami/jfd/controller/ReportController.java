@@ -1,7 +1,9 @@
 package com.konami.jfd.controller;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.jfinal.core.Controller;
 import com.konami.jfd.biz.GoodsBiz;
@@ -61,6 +63,11 @@ public class ReportController extends Controller {
 		} else {
 			invList = rb.loadInvByPara(inv,ft,tt);
 		}
+		Set<String> invGoodNameSet = new HashSet<String>();
+		for (int i = 0; i < invList.size(); i++) {
+			invGoodNameSet.add(invList.get(i).getStr("gname"));
+		}
+		setAttr("invGoodNameSet", invGoodNameSet);
 		List<Goods> goodsList = gb.loadAll();
 		List<User> userList = ub.loadAllUser();
 		setAttr("goodsList", goodsList);
@@ -81,6 +88,11 @@ public class ReportController extends Controller {
 		} else {
 			sellList = rb.loadSellByPara(sell,ft,tt);
 		}
+		Set<String> invGoodNameSet = new HashSet<String>();
+		for (int i = 0; i < sellList.size(); i++) {
+			invGoodNameSet.add(sellList.get(i).getStr("gname"));
+		}
+		setAttr("invGoodNameSet", invGoodNameSet);
 		List<Goods> goodsList = gb.loadAll();
 		List<User> userList = ub.loadAllUser();
 		setAttr("goodsList", goodsList);

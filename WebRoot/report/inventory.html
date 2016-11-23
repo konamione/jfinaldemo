@@ -68,6 +68,9 @@ a:active {
 	text-decoration: underline;
 	background-color: #eee;
 }
+.wid{
+	width:200px;
+}
 </style>
 <script type="text/javascript" src="${contextPath}/js/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="${contextPath}/js/jquery/jquery.easyui.min.js"></script>
@@ -122,11 +125,111 @@ a:active {
     		<td>规格型号</td>
     		<td>入库类型</td>
     		<td>备注</td>
-    		<td>创建时间</td>
+    		<td class="wid">创建时间</td>
     		<td>创建人</td>
     	</tr>
     	<!-- 切记！！！freemarker需要安全输出，要使用（）！‘’形式判断字段是否为空，否则显示不出来 -->
-    	<#assign sum = 0/>
+    	<!-- <tr style="background-color:#fff">
+   			<td>${(inv.id)!'空'}</td>
+   			<td>${(inv.gname)!'空'}</td>
+   			<td>${(inv.gnum)!'空'}</td>
+   			<td>${(inv.spec)!'空'}</td>
+   			<td>${(inv.type)!'空'}</td>
+   			<td>${(inv.remark)!'空'}</td>
+   			<td>${(inv.ctime)!'空'}</td>
+   			<td>${(inv.rname)!'空'}</td>
+   		</tr> -->
+   		<#assign total = 0>
+   		<#assign total1 = 0>
+    	<#list invGoodNameSet as name>
+    		<#assign sum = 0/>
+    		<#assign sum1 = 0/>
+    		<#list invList as inv>
+    			<#if inv.gname == name>
+    				<#if inv.type == "进货">
+    					<#assign sum = sum + inv.gnum/>
+    					<tr style="background-color:#fff">
+			    			<td>${(inv.id)!'空'}</td>
+			    			<td>${(inv.gname)!'空'}</td>
+			    			<td>${(inv.gnum)!'空'}</td>
+			    			<td>${(inv.spec)!'空'}</td>
+			    			<td>${(inv.type)!'空'}</td>
+			    			<td>${(inv.remark)!'空'}</td>
+			    			<td>${(inv.ctime)!'空'}</td>
+			    			<td>${(inv.rname)!'空'}</td>
+			    		</tr>
+    				
+    				<#elseif inv.type == "销售退货">
+    					<#assign sum1 = sum1 + inv.gnum/>
+    					<tr>
+			    			<td>${(inv.id)!'空'}</td>
+			    			<td>${(inv.gname)!'空'}</td>
+			    			<td style="color:#f00">${(inv.gnum)!'空'}</td>
+			    			<td>${(inv.spec)!'空'}</td>
+			    			<td style="color:#f00">${(inv.type)!'空'}</td>
+			    			<td>${(inv.remark)!'空'}</td>
+			    			<td>${(inv.ctime)!'空'}</td>
+			    			<td>${(inv.rname)!'空'}</td>
+			    		</tr>
+			    	<#elseif inv.type == "铺货退货">
+			    		<#assign sum1 = sum1 + inv.gnum/>
+    					<tr>
+			    			<td>${(inv.id)!'空'}</td>
+			    			<td>${(inv.gname)!'空'}</td>
+			    			<td style="color:#f00">${(inv.gnum)!'空'}</td>
+			    			<td>${(inv.spec)!'空'}</td>
+			    			<td style="color:#f00">${(inv.type)!'空'}</td>
+			    			<td>${(inv.remark)!'空'}</td>
+			    			<td>${(inv.ctime)!'空'}</td>
+			    			<td>${(inv.rname)!'空'}</td>
+			    		</tr>
+			    	</#if>
+    			</#if>
+    		</#list>
+    		<tr style="background-color:#eee">
+    			<td></td>
+    			<td>进货小计</td>
+    			<td>${sum}</td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    		</tr>
+    		<tr style="background-color:#eee">
+    			<td></td>
+    			<td>退货小计</td>
+    			<td style="color:red">${sum1}</td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    		</tr>
+    		<#assign total = total + sum>
+    		<#assign total1 = total1 + sum1>
+    	</#list>
+    	<tr style="background-color:#eee">
+   			<td></td>
+   			<td>进货合计</td>
+   			<td>${total}</td>
+   			<td></td>
+   			<td></td>
+   			<td></td>
+   			<td></td>
+   			<td></td>
+   		</tr>
+   		<tr style="background-color:#eee">
+   			<td></td>
+   			<td>退货合计</td>
+   			<td style="color:red">${total1}</td>
+   			<td></td>
+   			<td></td>
+   			<td></td>
+   			<td></td>
+   			<td></td>
+   		</tr>
+    	<!-- <#assign sum = 0/>
     	<#list invList as inv>
     	<#if (inv_index % 2) == 0>
     		<tr style="background-color:#eee">
@@ -139,6 +242,7 @@ a:active {
     			<td>${(inv.ctime)!'空'}</td>
     			<td>${(inv.rname)!'空'}</td>
     		</tr>
+    		
     		<#assign sum = sum + inv.gnum/>
     		<#if !inv_has_next>
     		<tr>
@@ -178,7 +282,7 @@ a:active {
     		</tr>
     		</#if>
     		</#if>
-    	</#list>
+    	</#list> -->
     </table>
     </div>
     </div>

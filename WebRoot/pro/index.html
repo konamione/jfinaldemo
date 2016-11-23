@@ -147,7 +147,7 @@ a:active {
 						<option value="pro">铺货</option>
 						<option value="proback">退货</option>
 					</select>客户姓名：<input type="text" name="sell.custname"  size="5"/><span style="color:red;">${cNameError!''}</span>日期：<input
-						type="text" name="sell.createTime" class="easyui-datetimebox" data-options="showSeconds:true"/>备注：<input type="text"
+						type="text" name="sell.createtime" class="easyui-datetimebox" data-options="showSeconds:true"/>备注：<input type="text"
 						name="sell.remark"  size="5"/><input type="submit" name="ok" value="添加"
 						onclick="return validator()" />
 				</fieldset>
@@ -185,7 +185,7 @@ a:active {
 					<td>${(sell.outType)!'空'}</td>
 					<td>${(sell.custname)!'空'}</td>
 					<td>${(sell.remark)!'空'}</td>
-					<td>${(sell.createTime)!'空'}</td>
+					<td>${(sell.createtime)!'空'}</td>
 					<td>${(sell.rname)!'空'}</td>
 				</tr>
 				<#else>
@@ -201,7 +201,7 @@ a:active {
 					<td>${(sell.outType)!'空'}</td>
 					<td>${(sell.custname)!'空'}</td>
 					<td>${(sell.remark)!'空'}</td>
-					<td>${(sell.createTime)!'空'}</td>
+					<td>${(sell.createtime)!'空'}</td>
 					<td>${(sell.rname)!'空'}</td>
 				</tr>
 				</#if>
